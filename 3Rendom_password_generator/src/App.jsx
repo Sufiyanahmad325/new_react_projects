@@ -13,19 +13,24 @@ function App() {
 
 
   const generate = () => {
-    let total = "";
-    let pass = "";
-    if (BigAlphabet) total += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    if (smallAlphabet) total += "abcdefghijklmnopqrstuvwxyz"
-    if (symbol) total += "!@#$%^&*()_+}{?[]"
-    if (number) total += "0123456789"
-
-    for (let i = 1; i <= length; i++) {
-      let char = Math.floor(Math.random() * total.length )
-      pass += total[char]
+    if(BigAlphabet||smallAlphabet||symbol||number){
+      let total = "";
+      let pass = "";
+      if (BigAlphabet) total += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      if (smallAlphabet) total += "abcdefghijklmnopqrstuvwxyz"
+      if (symbol) total += "!@#$%^&*()_+}{?[]"
+      if (number) total += "0123456789"
+  
+      for (let i = 1; i <= length; i++) {
+        let char = Math.floor(Math.random() * total.length )
+        pass += total[char]
+      }
+      setShowData(pass)
+      console.log(showData);
+    }else{
+      alert("check any element for generate rendom number")
     }
-    setShowData(pass)
-    console.log(showData);
+    
   }
 
   return (
