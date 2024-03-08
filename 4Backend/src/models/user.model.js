@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "the password is required"]
     },
-    vartar: {
+    avatar: {
         type: String,
         required: [true, "make sure are you select our vartar pic or not"]
     },

@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from "cors"
 import cookieParser from 'cookie-parser'
+import router from './routes/user.routes.js'
 
 const app = express()
 
@@ -14,8 +15,6 @@ app.use(express.urlencoded({extended:true , limit:'16kb'}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
-app.get('/api/v1/users', (req,res)=>{
-    res.send('<h1>hello</h1> <p>afdsfd</p>');
-})
+app.use('/api/v1/users', router)
 
 export default app
