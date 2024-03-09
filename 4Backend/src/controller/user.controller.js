@@ -25,11 +25,15 @@ const registerUser = asyncHandler(async (req, res) => {
       throw new ApiError(409, "user with email or username already exists")
    }
    const avatarLocalPath = await req.files?.avatar[0]?.path
-   const coverImgaeLocalPath = await req.files?.coverImage[0]?.path
+   // const coverImgaeLocalPath = await req.files?.coverImage[0]?.path
 
 
-   console.log("this is your file path ==========>", avatarLocalPath);
-   console.log("this is your file path ==========>", coverImgaeLocalPath);
+
+   let coverImgaeLocalPath;
+   if (req.file && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
+      req.files.coverImage[0].path
+   }
+
 
    if (!avatarLocalPath) {
       throw new ApiError(400, "Avatar file is required")
@@ -48,14 +52,14 @@ const registerUser = asyncHandler(async (req, res) => {
    const user = await User.create({
       fullName,
       avatar: avatar.url,
-      coverImage: coverImage.url || "",
+      coverImage: coverImage?.url || " ",
       email,
       password,
       username: username.toLowerCase()
    })
 
 
-   const createUser = await User.findOne({email}).select(
+   const createUser = await User.findById(user._id).select(
       "-password -refreshToken"
    )
 
@@ -69,6 +73,49 @@ const registerUser = asyncHandler(async (req, res) => {
 
 
 
+const loginUser = asyncHandler(async (req, res) => {
+   const { email, username, password } = req.body
+
+   if (!email && !password) {
+      throw new ApiError(400, 'username or email is required')
+   }
+
+   const user = await User.findOne({
+      $or: [{ username }, { email }]
+   })
+
+   if (!user) {
+      throw new ApiError(400, "user does not exist")
+   }
+
+   const isPasswordValid = await user.isPasswordCorrect(password)
+   console.log("hello======================>");
+
+   if (!isPasswordValid) {
+      throw new ApiError(400, "invalid user credentials check your password")
+   }
+
+   const accessToken = await user.generateAccessToken()
+   const refreshToken = await user.generateRefreshToken()
+
+   const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+
+   const option = {
+      httpOnly: true,
+      secure: true
+   }
+
+   return res.status(200)
+      .cookie("accessToken", accessToken, option)
+      .cookie("refreshToken", refreshToken, option)
+      .json(
+         new ApiResponse(200, { user: loggedInUser, accessToken, refreshToken }, "user logged in successfully")
+      )
+})
+
+
 export {
-   registerUser
+   registerUser,
+   loginUser
+
 }
