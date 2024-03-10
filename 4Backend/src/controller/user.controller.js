@@ -78,7 +78,7 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
    const { email, username, password } = req.body
 
-   if (!(email || username )) {
+   if (!(email || username)) {
       throw new ApiError(400, 'username or email is required')
    }
 
@@ -101,7 +101,7 @@ const loginUser = asyncHandler(async (req, res) => {
    const refreshToken = await user.generateRefreshToken()
 
    user.refreshToken = refreshToken
-    await user.save({validateBeforeSave:false})
+   await user.save({ validateBeforeSave: false })
 
    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
 
@@ -120,28 +120,37 @@ const loginUser = asyncHandler(async (req, res) => {
 
 
 
-const logoutUser = asyncHandler(async(req, res)=>{
-      const {_id} = req.user
+const logoutUser = asyncHandler(async (req, res) => {
+   const { _id } = req.user
 
-      const userlogout = User.findById(_id , {
-         $set:{
-            refreshToken:undefined
-         },
-         new:true
-      });
+   const userlogout = User.findByIdAndUpdate(_id, {
+      $set: {
+         refreshToken: undefined
+      },
+      new: true
+   });
 
 
 
-      const option ={
-         httpOnly:true,
-         secure:true
-      }
-     
-      res.status(200)
-      .clearCookie("accessToken" , option)
-      .clearCookie("refreshToken" , option)
+   const option = {
+      httpOnly: true,
+      secure: true
+   }
+
+   res.status(200)
+      .clearCookie("accessToken", option)
+      .clearCookie("refreshToken", option)
       .json(
-         new ApiResponse(200 , {} , "user logged out successfully")
+         new ApiResponse(200, {}, "user logged out successfully")
+      )
+})
+
+
+
+const getCurrentUser = asyncHandler(async (req, res) => {
+   res.status(200)
+      .json(
+         new ApiResponse(200, req.user, "currenctuser fetch successfully")
       )
 })
 
@@ -149,9 +158,73 @@ const logoutUser = asyncHandler(async(req, res)=>{
 
 
 
+
+const changePassword = asyncHandler(async (req, res) => {
+   const { password, newPassword, confirmPassword } = req.body
+
+   if (newPassword !== confirmPassword) {
+      throw new ApiError(401, "new password and confirm password does not match")
+   }
+
+   const user = await User.findById(req.user?._id)
+   const isPasswordCorrect = await user.isPasswordCorrect(password)
+
+   console.log(isPasswordCorrect, "  ===============>");
+   if (!isPasswordCorrect) {
+      throw new ApiError(400, "invalid old password")
+   }
+
+   user.password = newPassword
+
+   await user.save({ validateBeforeSave: false })
+
+   return res.status(200)
+      .json(new ApiResponse(200, {}, 'password change successfully'))
+
+})
+
+
+const updateAccountDetails = asyncHandler(async (req, res) => {
+   const { userName, email } = req.body
+
+   if (!userName || !email) {
+      throw new ApiError(400, "All fields are required")
+   }
+
+   console.log( "data nhi mil rha hai" , "==============>");
+   const user = await User.findByIdAndUpdate(req.user?._id,
+      {
+         $set: {
+            username: userName,
+            email:email
+         },
+
+      },
+      {
+         new: true
+      },
+   ).select("-password")
+
+   if(!user){
+         console.log("data nhi milga");
+   }
+
+
+   return res.status(200)
+      .json(
+         new ApiResponse(200, user, "details updated")
+      )
+})
+
+
+
+
 export {
    registerUser,
    loginUser,
-   logoutUser
+   logoutUser,
+   getCurrentUser,
+   changePassword,
+   updateAccountDetails
 
 }

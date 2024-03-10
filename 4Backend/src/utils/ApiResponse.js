@@ -7,8 +7,7 @@ class ApiResponse {
     }
 }
 
-let a = new ApiResponse(220 , "hello " , "mysuccess")
-console.log(a);
+
 
 
 export {ApiResponse}
