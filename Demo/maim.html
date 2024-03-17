@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: rgb(82, 82, 82);
+            width: 100vw;
+            height: 100vh;
+
+        }
+
+        .one {
+            display: flex;
+            gap: 5px;
+            width: 400px;
+            justify-content: space-between;
+            margin: auto;
+        }
+
+       .super {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+
+
+
+        }
+
+        .main-box{
+                position: relative;
+                top: 40px;
+        }
+
+        .cheackedpart {
+            display: flex;
+            width: 300px;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: auto;
+        }
+
+        .addclick {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 10px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        #myInput {
+            padding: 12px 12px;
+            width: 200px;
+
+        }
+
+        button {
+            font-weight: 600;
+            padding: 2px 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="super">
+        <div class="main-box">
+            <div class="one">
+                <div>
+                    <input type="text" value="" id="myInput" disabled>
+                    <input type="number" value="5" min="5" max="10" id="chooseNumber">
+                </div>
+                <button onclick="createRandomNuber()">Submit</button>
+            </div>
+
+            <div class="cheackedpart">
+                <div class="addclick">
+                    <label for="number">number</label>
+                    <input type="checkbox" name="number" id="number">
+                </div>
+                <div class="addclick">
+                    <label for="alphabet">Alphabet</label>
+                    <input type="checkbox" name="alphabet" id="alphabet">
+                </div>
+                <div class="addclick">
+                    <label for="symbol">Symbol</label>
+                    <input type="checkbox" name="symbol" id="symbol">
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+</body>
+
+
+<script>
+
+
+
+    const createRandomNuber = () => {
+        let a = document.getElementById('number')
+        let b = document.getElementById('alphabet')
+        let c = document.getElementById('symbol')
+        let d = document.getElementById('chooseNumber')
+        let e = document.getElementById('myInput')
+        let random = ""
+        let randomNumber = ""
+
+        if(!a.checked && !b.checked && !c.checked){
+            alert("select checkBox")
+            return
+        }
+
+        if (a.checked) {
+            random += "0123456789"
+        }
+        if (b.checked) {
+            random += "abcdefghijklmnopqrstuvwxyz"
+        }
+
+        if (c.checked) {
+            random += "!@#$%^&*()?><"
+        }
+
+        for (let i = 0; i < Number(d.value); i++) {
+            let num = Math.floor(Math.random() * random.length)
+            randomNumber += random.charAt(num)
+        }
+
+        e.value = randomNumber
+        console.log(random);
+    }
+
+
+
+</script>
+
+
+</html>
