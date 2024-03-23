@@ -1,0 +1,125 @@
+body{
+    background-color: gray;
+    padding: 0;margin: 0;
+    box-sizing: border-box;
+}
+
+.header{
+
+    display: flex;
+    width: 100vw;
+    height: 10vh;
+    background-color: red;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.header ul{
+    /* width: 40vw; */
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    font-weight: 600;
+    margin-right: 20px;
+    
+}
+
+.option .line{
+    border-radius: 6px;
+    width: 35px;
+    height: 6px;
+    background-color: rgb(17, 18, 19);
+    margin-left: 20px;
+    display: none;
+}
+
+.hamberger{
+    display: flex;
+    gap: 22px;
+
+
+
+}
+
+.option{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.logo{
+    font-size: 22px;
+    font-weight: 600;
+    height: 100%;
+    width: 100%;
+}
+
+
+
+
+
+.hideHeader{
+    width: 200px;
+    background-color: rgb(89, 89, 162);
+    position: absolute;
+    height: 400px;
+    left: 0px;
+    transition: all 0.3s ease-in;
+}
+
+.hideHeader ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-weight: 600;
+    padding-top: 8px;
+}
+
+
+.yellow{
+    width: 200px;
+    background-color: rgb(89, 89, 162);
+    position: absolute;
+    height: 400px;
+    left: -200px;
+    transition: all 0.3s ease-in;
+
+}
+
+.yellow ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-weight: 600;
+    padding-top: 8px;
+}
+
+
+@media(max-width: 500px) {
+    body{
+        background-color: green;
+    }
+    .header ul li{
+        display: none;
+    }
+    .option .line{
+        display: block;
+    }
+    /* .hideHeader ul{
+        display: block;
+    } */
+}
+
+@media(min-width:500px){
+    .hideHeader ul{
+        display: none;
+    }
+
+
+}
