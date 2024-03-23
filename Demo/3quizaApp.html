@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+            .hero{
+                width: 400px;
+                background-color: rgb(110, 110, 173);
+                margin: auto;
+                height: 40vh;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 40px;
+            }
+            .hero h1{
+                display: flex;
+                justify-content: center;
+                
+            }
+            .btn{
+                padding:8px 40px ;
+                margin: auto;
+                border-radius: 10px;
+                border: none;
+                font-weight: 600;
+            }
+
+            .second-hero{
+                display: flex;
+                gap: 20px;
+                line-height: 25px;
+                margin-left: 10px;
+            }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="hero">
+        <h1>The Quiz</h1>
+        <div class="main">
+            <div class="second-hero">
+                <input type="radio" id="1" name="option" >
+                <label for="1">Option 1</label>
+            </div>
+
+            <div class="second-hero">
+                <input type="radio" id="2" name="option">
+                <label for="2">Option 2</label>
+            </div>
+
+            <div class="second-hero">
+                <input type="radio" id="3" name="option">
+                <label for="3">Option 3</label>
+            </div>
+
+            <div class="second-hero">
+                <input type="radio" id="4" name="option">
+                <label for="4">Option 4</label>
+            </div>
+        </div>
+        <button class="btn" id="btn">Submit</button>
+    </div>
+
+
+    <script>
+        let quiz = [{
+            quizquestion:{
+                question:"who is the capital of bihar",
+                a:"patna",
+                b:"Up",
+                c:"hyderabad",
+                d:"MP",
+                correct:"patna"
+            },
+
+            quizquestion:{
+                question:"who is capital of india",
+                a:"istanbul",
+                b:"Tokiyo",
+                c:"tehran",
+                d:"new Delhi"
+            }
+
+        }
+        ]
+        let change ;
+            let btn = document.getElementById("btn")
+            let a = document.getElementsByTagName("label")
+            
+
+
+
+            btn.addEventListener("click" , ()=>{
+
+            })
+    </script>
+</body>
+
+</html>
