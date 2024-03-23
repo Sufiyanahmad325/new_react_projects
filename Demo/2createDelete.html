@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div class="myInput">
+            <input type="text" name="" id="myid">
+            <button onclick="Add()">Add</button>
+
+        </div>
+        <div class="lists">
+
+        </div>
+    </div>
+
+    <script>
+
+        let lists = document.getElementsByClassName("lists")[0]
+        let myid = document.getElementById("myid")
+
+        const Add = ()=>{
+            let a = document.createElement("h3")
+            a.innerText = myid.value
+            myid.value=""
+            lists.appendChild(a)
+
+            a.addEventListener("click",()=>{
+                a.remove()
+            })
+        }
+
+    </script>
+</body>
+</html>
