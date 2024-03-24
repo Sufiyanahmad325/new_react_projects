@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .hero {
+            width: 400px;
+            background-color: rgb(141, 141, 218);
+            margin: auto;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 40px;
+            border-radius: 15px;
+        }
+
+        .hero h1,
+        h3 {
+            display: flex;
+            justify-content: center;
+
+        }
+
+        h1 {
+            color: rgb(94, 27, 27);
+        }
+
+        .btn {
+            padding: 8px 40px;
+            margin: auto;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+        }
+
+        .second-hero {
+            display: flex;
+            gap: 20px;
+            line-height: 25px;
+            margin-left: 10px;
+        }
+
+        .scorebox{
+            display: flex;
+            justify-content: center;
+            font-size: 20px;
+            background-color: yellow;
+            font-weight: bold;
+            
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="hero">
+        <div>
+            <h1>The Quiz</h1>
+            <h3 id="sawal">hello sir</h3>
+        </div>
+        <div class="main">
+            <div class="second-hero">
+                <input type="radio" class="option" id="1" name="option" value="a">
+                <label for="1">Option 1</label>
+            </div>
+
+            <div class="second-hero">
+                <input type="radio" class="option" id="2" name="option" value="b">
+                <label for="2">Option 2</label>
+            </div>
+
+            <div class="second-hero">
+                <input type="radio" class="option" id="3" name="option" value="c">
+                <label for="3">Option 3</label>
+            </div>
+
+            <div class="second-hero">
+                <input type="radio" class="option" id="4" name="option" value="d">
+                <label for="4">Option 4</label>
+            </div>
+        </div>
+        <button class="btn" id="btn1">Submit</button>
+        <div class="scorebox"></div>
+    </div>
+
+
+    <script>
+        let quiz = [{
+            question: "who is the capital of bihar",
+            a: "Patna",
+            b: "Up",
+            c: "Hyderabad",
+            d: "MP",
+            correct: "a"
+        },
+
+        {
+            question: "who is capital of india",
+            a: "Istanbul",
+            b: "Tokiyo",
+            c: "Tehran",
+            d: "New Delhi",
+            correct: "d"
+        },
+        {
+            question: "who is capital of turkey",
+            a: "Istanbul",
+            b: "Tokiyo",
+            c: "Tehran",
+            d: "New Delhi",
+            correct: "a"
+        },
+        {
+            question: "who is capital of china",
+            a: "Istanbul",
+            b: "Tokiyo",
+            c: "Tehran",
+            d: "New Delhi",
+            correct: "b"
+        }
+
+        ]
+        let result = 0
+
+        let btn = document.getElementById("btn1")
+        let a = document.getElementsByTagName("label")
+        let sawal = document.getElementById("sawal")
+        let input = document.querySelectorAll('.option')
+
+
+        let myCureenctQuiz = 0
+        function loadQuestion() {
+            removeChecked()
+            sawal.innerText = quiz[myCureenctQuiz].question
+            a[0].innerText = quiz[myCureenctQuiz].a
+            a[1].innerText = quiz[myCureenctQuiz].b
+            a[2].innerText = quiz[myCureenctQuiz].c
+            a[3].innerText = quiz[myCureenctQuiz].d
+
+        }
+
+
+        btn.addEventListener('click' , ()=>{
+            let a =mYcheck()
+            if(a){
+                if(a == quiz[myCureenctQuiz].correct){
+                    result ++
+                }
+                if(myCureenctQuiz < quiz.length - 1){
+                    myCureenctQuiz++
+                    loadQuestion()
+                }else{
+                    let a = document.createElement('div')
+                    a.className="me"
+                    a.innerText=`Score => ${result}/${quiz.length}`
+                    document.body.getElementsByClassName("scorebox")[0].appendChild(a)
+                    btn.remove()
+    
+                }
+                }
+        })
+
+        const mYcheck = ()=>{
+            let checkdata
+            input.forEach((ele)=>{
+             if(ele.checked){
+                 checkdata = ele.value
+             }
+            })
+            return checkdata
+        }
+
+        const removeChecked = ()=>{
+            input.forEach((ele)=>{
+                if(ele.checked){
+                    ele.checked = false
+                }
+            })
+        }
+
+loadQuestion()
+    </script>
+</body>
+
+</html>
