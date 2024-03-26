@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .countdown {
+            width: 100vw;
+            height: 100vh;
+            background-color: aquamarine;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .box {
+            width: 100px;
+            height: 80px;
+            border-radius: 10px;
+            box-shadow: -10px 10px 10px rgb(7, 7, 7);
+            background-color: rgb(205, 191, 191);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="countdown">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+
+
+    <script>
+
+        let boxes = document.querySelectorAll(".box")
+
+        let futureDate = " 10 April 2024 06:00 AM"
+            
+               
+        const time =()=>{
+                    let mydate = new Date(futureDate)
+                    let now = new Date()
+                    let convert= (mydate - now)/1000
+                    
+                    boxes[0].innerText=Math.floor(convert/60/60/24)
+                    boxes[1].innerText=Math.floor(convert/60/60)%24
+                    boxes[2].innerText=Math.floor(convert/60)%60
+                    boxes[3].innerText=Math.floor(convert)%60
+                }
+           time()
+
+           setInterval(()=>{
+            time()
+           },1000)
+    </script>
+</body>
+
+</html>

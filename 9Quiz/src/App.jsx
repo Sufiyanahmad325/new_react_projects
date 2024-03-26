@@ -15,8 +15,8 @@ function App() {
     },
     {
       question: "Where is capital of russia",
-      options: ["Delhi", "Ankara", "Tokiyo", "Dhaka"],
-      correctAnswer: "Ankara"
+      options: ["Delhi", "moscow", "Tokiyo", "Dhaka"],
+      correctAnswer: "moscow"
     },
     {
       question: "Where is the capital of France?",
@@ -25,8 +25,8 @@ function App() {
     },
     {
       question: "Where is capital of russia",
-      options: ["Delhi", "Ankara", "Tokiyo", "Dhaka"],
-      correctAnswer: "Ankara"
+      options: ["moscow", "Ankara", "Tokiyo", "Dhaka"],
+      correctAnswer: "moscow"
     },
     // Add more questions here
   ];

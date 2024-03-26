@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+        .main-hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .hero {
+            background-color: gray;
+            width: 400px;
+            height: 370px;
+            border-radius: 20px;
+            /* display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column; */
+        }
+
+        h1 {
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        h2 {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0px 30px 0px;
+        }
+
+        .allOption {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-left: 20px;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .boxes {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            margin: auto;
+            display: flex;
+            position: relative;
+            top: 60px;
+            padding: 10px 30px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .me {
+            background-color: darkgreen;
+            font-size: 20px;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            height: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-hero">
+        <div class="hero">
+            <h1>The Quiz</h1>
+            <h2 class="question">question</h2>
+
+            <div class="allOption">
+                <div class="boxes">
+                    <input type="radio" name="option" id="1" value="a" class="myInput">
+                    <label for="1">option</label>
+                </div>
+
+                <div class="boxes">
+                    <input type="radio" name="option" id="2" value="b" class="myInput">
+                    <label for="2">option</label>
+                </div>
+
+                <div class="boxes">
+                    <input type="radio" name="option" id="3" value="c" class="myInput">
+                    <label for="3">option</label>
+                </div>
+
+                <div class="boxes">
+                    <input type="radio" name="option" id="4" value="d" class="myInput">
+                    <label for="4">option</label>
+                </div>
+
+            </div>
+            <button class="btn" onclick="submit()">Submit</button>
+            <div class="scorebox">
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        let quiz = [{
+            question: "who is the capital of bihar",
+            a: "Patna",
+            b: "Up",
+            c: "Hyderabad",
+            d: "MP",
+            correct: "a"
+        },
+
+        {
+            question: "who is capital of india",
+            a: "Istanbul",
+            b: "Tokiyo",
+            c: "Tehran",
+            d: "New Delhi",
+            correct: "d"
+        },
+            // {
+            //     question: "who is capital of turkey",
+            //     a: "Istanbul",
+            //     b: "Tokiyo",
+            //     c: "Tehran",
+            //     d: "New Delhi",
+            //     correct: "a"
+            // },
+            // {
+            //     question: "who is capital of china",
+            //     a: "Istanbul",
+            //     b: "Tokiyo",
+            //     c: "Tehran",
+            //     d: "New Delhi",
+            //     correct: "b"
+            // }
+        ]
+
+        let currecntQuestion = 0;
+        let result = 0
+        let options = document.querySelectorAll(".myInput")
+        let label = document.getElementsByTagName("label")
+        let myquestion = document.querySelector(".question")
+
+        const loadQuestion = () => {
+            main()
+            myquestion.innerText = quiz[currecntQuestion].question
+            options[0].nextElementSibling.innerText = quiz[currecntQuestion].a
+            options[1].nextElementSibling.innerText = quiz[currecntQuestion].b
+            options[2].nextElementSibling.innerText = quiz[currecntQuestion].c
+            options[3].nextElementSibling.innerText = quiz[currecntQuestion].d
+        }
+
+        const submit = () => {
+            let data = check()
+            if (data) {
+                if (data === quiz[currecntQuestion].correct) {
+                    result += 1
+                }
+                if (currecntQuestion < quiz.length - 1) {
+                    currecntQuestion++
+                    loadQuestion()
+                } else {
+                    let a = document.createElement('div')
+                    a.className = "me"
+                    a.innerText = `Score  ${result}/${quiz.length}`
+                    document.getElementsByClassName("scorebox")[0].appendChild(a)
+                    document.getElementsByClassName("btn")[0].remove()
+
+
+                    // let scoreDiv = document.createElement('div');
+                    // scoreDiv.innerText = `Score => ${result}/${quiz.length}`;
+                    // document.querySelector(".main-hero").appendChild(scoreDiv);
+                    // document.querySelector(".btn").remove();
+                }
+            }
+        }
+
+
+        
+        const check = () => {
+            let mYcheck = ""
+            options.forEach((ele) => {
+                if (ele.checked) {
+                    mYcheck = ele.value
+                }
+            })
+            return mYcheck
+        }
+
+        const main=()=>{
+            options.forEach((ele)=>{
+                if(ele.checked){
+                    ele.checked=false
+                }
+            })
+        }
+        
+        loadQuestion()
+    </script>
+</body>
+
+</html>
