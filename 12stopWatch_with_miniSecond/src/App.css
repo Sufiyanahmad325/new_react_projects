@@ -1,0 +1,35 @@
+.main-hero{
+  width: 100vw;
+  height: 100vh;
+}
+
+.hero{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+.watch{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+
+}
+
+.box{
+  width: 100px;
+  height: 90px;
+  background-color: gray;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+
+}
