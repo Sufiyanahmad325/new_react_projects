@@ -1,0 +1,21 @@
+.list img{
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+
+}
+
+.list{
+    background-color: rgb(151, 188, 188);
+    height: 180px;
+    width: 300px;
+    border-radius: 5px;
+
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    margin: 0px 5px;
+}
