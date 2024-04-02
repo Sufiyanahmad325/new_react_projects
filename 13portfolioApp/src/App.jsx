@@ -49,7 +49,7 @@ function App() {
       type: "lunch",
       name: "butter chiken nan",
       img: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=400",
-      price: '11'
+      price: '12'
     },
     {
       type: "dinner",
