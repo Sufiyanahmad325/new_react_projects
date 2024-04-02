@@ -1,12 +1,16 @@
 import React from 'react'
 import './List.css'
-function List() {
+function List({
+  image,
+  price,
+  name
+}) {
   return (
     <div className='list'>
-        <img src="https://images.pexels.com/photos/7945944/pexels-photo-7945944.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="img" />
+        <img src={image} alt="img" />
         <div className='content'>
-            <h4>bamb biryani</h4>
-            <p>$10</p>
+            <h4>{name}</h4>
+             <button className='button'>${ price}</button>
         </div>
     </div>
   )
