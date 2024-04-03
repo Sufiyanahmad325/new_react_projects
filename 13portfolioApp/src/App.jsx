@@ -7,6 +7,7 @@ import Btn from './Btn'
 function App() {
   const [data, setData] = useState([])
   const [filterData, setfilterData] = useState([])
+  const [search , setSeacrch] = useState('')
 
   const foods = [
     {
@@ -79,17 +80,33 @@ function App() {
     setfilterData(foods)
   }, [])
 
-  console.log(filterData);
+
+  const myChangeData = (type) => {
+    if (type === "all") {
+      setfilterData(data);
+      return;
+    } else {
+      setfilterData(data.filter(ele => ele.type === type));
+    }
+  };
+
+  
+  const mySearch = (value)=>{
+        setfilterData(data.filter(ele=>ele.type.toLowerCase().includes(value.toLowerCase())))
+        
+  }
+
+ 
 
 
   return (
     <div className='main'>
-      <Header />
+      <Header mySearch={mySearch} />
       <div className='mybtn'>
-        <Btn name={'All'}/>
-        <Btn name={'BreakFast'} />
-        <Btn name={'Lunch'} />
-        <Btn name={'Dinner'} />
+        <button onClick={()=>myChangeData("all")}>All</button>
+        <button onClick={()=>myChangeData("breakfast")}>breakfast</button>
+        <button onClick={()=>myChangeData("lunch")}>Lunch</button>
+        <button onClick={()=>myChangeData("dinner")}>Dinner</button>
       </div>
 
 

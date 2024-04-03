@@ -21,4 +21,14 @@
     gap: 15px;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
+}
+
+.mybtn button{
+    padding: 6px 10px;
+    background-color: cadetblue;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 10px 10px 10px black;
+    margin-bottom: 20px;
 }
