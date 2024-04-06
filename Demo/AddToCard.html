@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+
+        }
+
+        .container {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+            align-items: start;
+            gap: 6px;
+        }
+
+        img {
+            width: 250px;
+            margin-bottom: 5px;
+            border-radius: 6px;
+        }
+
+        .list {
+            width: 300px;
+            height: auto;
+            background-color: rgb(58, 53, 53);
+            padding: 10px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 7px;
+            color: rgb(223, 215, 55);
+            font-weight: 600;
+        }
+
+        .btn {
+            padding: 6px 10px;
+            background-color: rgb(94, 94, 94);
+            color: wheat;
+            border: none;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        li {
+            list-style: none;
+            margin-left: 30px;
+            margin-top: 20px;
+        }
+        .card{
+            width: 50vw;
+            min-height: 300px;
+            background-color: rgb(59, 59, 67);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin: auto;
+            position: relative;
+            top: 30px;
+            color: wheat;
+            padding-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgb(24, 85, 24);
+
+        }
+        #mylist{
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="list">
+            <img src="https://images.pexels.com/photos/18577251/pexels-photo-18577251/free-photo-of-two-men-sitting-on-the-edge-of-the-water-with-fishing-poles.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+                alt="img">
+            <p class="productName">Product Name 1</p>
+            <button class="btn">Add to Card</button>
+        </div>
+        <div class="list">
+            <img src="https://images.pexels.com/photos/18577251/pexels-photo-18577251/free-photo-of-two-men-sitting-on-the-edge-of-the-water-with-fishing-poles.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+                alt="img">
+            <p class="productName">Product Name 2</p>
+            <button class="btn">Add to Card</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Added Card Item</h2>
+        <div id="mylist">
+            <li>hello</li>
+        </div>
+    </div>
+
+    <script>
+
+        let productName = document.getElementsByClassName("productName")
+        let btn = document.getElementsByClassName("btn")
+
+
+
+        for (let i = 0; i < productName.length; i++) {
+            btn[i].addEventListener("click", () => {
+                console.log("hello");
+                let a = document.createElement("li")
+                a.innerText = productName[i].innerText
+                document.getElementById("mylist").appendChild(a)
+            })
+        }
+    </script>
+</body>
+
+</html>
