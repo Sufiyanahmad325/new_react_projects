@@ -23,6 +23,7 @@
             justify-content: center;
             align-items: center; */
         }
+
         /* input{
             color: black;
         } */
@@ -46,17 +47,17 @@
             padding: 5px 8px;
         }
 
-        .Signup-body p{
+        .Signup-body p {
             margin-top: 20px;
 
         }
 
-        .Signup-body p label{
-                font-size: 18px;
-                font-weight: 600;
+        .Signup-body p label {
+            font-size: 18px;
+            font-weight: 600;
         }
 
-        .Signup-body p input{
+        .Signup-body p input {
             width: 100%;
             padding: 10px 10px;
             border-radius: 5px;
@@ -68,25 +69,31 @@
             cursor: pointer;
         }
 
-        .Signup-body p input[type="submit"]:hover{
+        .Signup-body p input[type="submit"]:hover {
             background-color: rgb(125, 125, 167);
         }
 
-        .signup-footer p{
+        .signup-footer p {
             text-align: center;
             font-weight: 600;
             margin-top: 20px;
             margin-bottom: 10px;
 
         }
-        .signup-footer p a{
+
+        .signup-footer p a {
             text-decoration: none;
         }
 
-        .signup-footer p a:hover{
-                text-decoration: underline;
+        .signup-footer p a:hover {
+            text-decoration: underline;
         }
-        
+
+        .Signup-body p span {
+            font-size: 18px;
+            font-weight: 600;
+            color: #359f35;
+        }
     </style>
 </head>
 
@@ -100,31 +107,107 @@
                 <form action="#">
                     <p>
                         <label for=" name">Full Name</label>
-                        <input type="text" placeholder="Type name here" id="name" >
-
+                        <input type="text" placeholder="Type name here" id="name">
+                        <span id="nameErr"></span>
                     </p>
 
                     <p>
                         <label for=" eamil">Email</label>
                         <input type="email" placeholder="xyz@gmail.com" id="email">
+                        <span id="EmailErr"></span>
                     </p>
 
                     <p>
                         <label for=" password">Password</label>
-                        <input type="password" placeholder="at least 8 Charactor" id="password">
+                        <input type="password" pattern="^(?=.*[a-zA-Z])(?=.*[\d])(?=.*[\W_]).{8,}$" placeholder="at least 8 Charactor" id="password">
+                        <span id="passwordErr"></span>
                     </p>
 
                     <p>
-                        <input type="submit" value="Create Account">
+                        <input type="submit" id="submitBtn" value="Create Account">
                     </p>
                 </form>
 
             </main>
             <footer class="signup-footer">
-                <p >Already have an account? <a href="">Login</a></p>
+                <p>Already have an account? <a href="">Login</a></p>
             </footer>
         </div>
     </div>
+
+    <script>
+
+        const submitBtn = document.getElementById("submitBtn")
+        const name = document.getElementById("name");
+        const nameErr = document.getElementById("nameErr")
+        const email = document.getElementById("email")
+        const EmailErr = document.getElementById("EmailErr")
+        const password = document.getElementById("password")
+        const passwordErr = document.getElementById("passwordErr")
+
+
+
+        submitBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            if (validateName() && validateEmail() && validPassword()) {
+                alert("form submitted Successfully")
+            }
+
+        })
+
+
+        const validateName = () => {
+            if (name.value == "") {
+                console.log(name.length);
+                nameErr.innerHTML = "Name is required";
+                return false;
+            }
+
+            if (!name.value.match(/^[A-Za-z]*\s{1}[A-Za-z]*$/)) {
+                nameErr.innerHTML = "Write full Name"
+                return false
+            }
+
+            nameErr.innerHTML = ""
+            return true
+        }
+
+
+        const validateEmail = () => {
+            if (email.value == "") {
+                EmailErr.innerHTML = "Email is required";
+                return false;
+            }
+
+            if (!email.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+                EmailErr.innerHTML = "Enter valid Email";
+                return false;
+            }
+
+            EmailErr.innerHTML = "";
+            return true;
+        }
+
+
+
+
+        const validPassword = ()=>{
+            if(password.value.trim() == ""){
+                passwordErr.innerHTML = "password is required"
+                return false
+            }
+
+            return true
+        }
+
+
+
+
+
+
+
+
+    </script>
 </body>
 
 </html>
