@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            display: flex;
+            gap: 115px;
+            margin-left: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            background-color: gray;
+            width: 100vw;
+            height: 50vh;
+        }
+
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="main">
+            <li>hello1</li>
+            <button>delete</button>
+        </div>
+        <div class="main">
+            <li>hello2</li>
+            <button>delete</button>
+        </div>
+        <div class="main">
+            <li>hello3</li>
+            <button>delete</button>
+        </div>
+        <div class="main">
+            <li>hello4</li>
+            <button>delete</button>
+        </div>
+
+
+    </div>
+
+    <script>
+
+            let button = document.querySelectorAll(".main button")
+
+            button.forEach((Element)=>{
+                Element.addEventListener("click" , ()=>{
+                    Element.parentElement.remove()
+                })
+            })
+        
+
+    </script>
+</body>
+
+</html>
