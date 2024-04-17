@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: gray;
+            color: white;
+        }
+
+        #mydiv {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        #btn {
+            background-color: green;
+            border-radius: 5px;
+            border: none;
+            width: 60px;
+            height: 40px;
+        }
+
+        #input {
+            padding: 10px 10px;
+            font-size: 18px;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid black;
+        }
+
+        #input[type="text"] {
+            color: rgb(33, 50, 35);
+            font-weight: 600;
+        }
+
+        .main {
+            padding-top: 10px;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lists{
+            width: 330px;
+            list-style: none;
+            font-weight: 600;
+            font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .lists button{
+            padding: 8px 10px;
+            border-radius: 5px;
+            background-color: green;
+            border: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mydiv">
+        <div class="main">
+            <input type="text" id="input">
+            <button id="btn">Add</button>
+        </div>
+        
+    </div>
+
+
+    <script>
+
+        const mydiv = document.getElementById("mydiv")
+        const input = document.getElementById("input")
+            const btn = document.getElementById("btn")
+            btn.addEventListener("click" , ()=>{
+                let list = document.createElement("div")
+                list.classList="lists"
+
+                let button = document.createElement("button")
+                button.innerText="delete"
+                
+                let li = document.createElement("li")
+                li.innerText=input.value
+                input.value=""
+
+
+                mydiv.appendChild(list)
+                list.appendChild(li)
+                list.appendChild(button)
+
+
+                list.addEventListener("click" , ()=>{
+                    list.remove()
+                })
+
+            })
+
+    </script>
+
+</body>
+
+</html>
