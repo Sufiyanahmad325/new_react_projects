@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: gray;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding-top: 20px;
+        }
+
+        .main input {
+            font-size: 18px;
+            padding: 6px 6px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        ::placeholder {
+            color: rgb(165, 165, 79);
+        }
+
+        #btn {
+            padding: 4px 12px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .listContainer {
+            display: flex;
+            width: 300px;
+            position: relative;
+            left: 110px;
+            justify-content: space-between;
+            margin-top: 10px;
+            align-items: center;
+        }
+
+        li {
+            list-style: none;
+            font-size: 18px;
+            font-weight: 600;
+
+        }
+
+        .listContainer button {
+            padding: 3px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <input type="text" id="input" placeholder="type here">
+            <button id="btn">Save</button>
+        </div>
+        <div class="listContainer">
+            <li>home</li>
+            <button class="editBtn">Edit</button>
+        </div>
+    </div>
+
+    <script>
+        let btn = document.getElementById("btn");
+        let input = document.getElementById("input");
+        let container = document.getElementsByClassName("container")[0];
+        let currentEditItem = null; // To keep track of the item being edited
+
+        btn.addEventListener("click", () => {
+            if(btn.innerText === "Edit"){
+                currentEditItem.innerText = input.value;
+                btn.innerText = "Save";
+                input.value = "";
+                currentEditItem = null; 
+            }
+            else if (input.value.trim() !== "") {
+                let listContainer = document.createElement('div');
+                listContainer.className = "listContainer";
+
+                let btns = document.createElement("div")
+                btns.className="btns"
+
+                let list = document.createElement("li");
+                list.innerText = input.value;
+
+                let deletebtn = document.createElement("button")
+                deletebtn.innerText="delete"
+
+
+                let editBtn = document.createElement("button");
+                editBtn.innerText = "Edit";
+
+                container.appendChild(listContainer);
+                listContainer.appendChild(list);
+                listContainer.appendChild(btns)
+                btns.appendChild(editBtn);
+                btns.appendChild(deletebtn);
+
+                input.value = "";
+
+                // Add event listener to edit button
+                editBtn.addEventListener("click", () => {
+                    input.value = list.innerText;
+                    btn.innerText = "Edit";
+                    currentEditItem = list; 
+                });
+
+                deletebtn.addEventListener("click" , ()=>{
+                    listContainer.remove()
+                })
+            }
+        });
+    </script>
+</body>
+</html>
