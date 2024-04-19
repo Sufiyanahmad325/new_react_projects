@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding-top: 50px;
+        }
+
+        .main {
+            background-color: aqua;
+            padding: 15px 15px;
+        }
+
+        .main img {
+            width: 250px;
+            height: 180px;
+        }
+
+        .lists {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btns {
+            display: flex;
+            gap: 30px;
+        }
+
+        button {
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: none;
+            background-color: gray;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="btns">
+            <button id="all">All</button>
+            <button id="nature">Nature</button>
+            <button id="flower">flower</button>
+        </div>
+
+        <div class="lists">
+
+        </div>
+    </div>
+
+
+    <script>
+        let data = [
+            {
+                Image: "https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                type: "nature",
+
+            },
+            {
+                Image: "https://images.pexels.com/photos/707344/pexels-photo-707344.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                type: "nature"
+            },
+            {
+                Image: "https://images.pexels.com/photos/68507/spring-flowers-flowers-collage-floral-68507.jpeg?auto=compress&cs=tinysrgb&w=600",
+                type: "flower"
+            },
+            {
+                Image: "https://images.pexels.com/photos/581222/pexels-photo-581222.jpeg?auto=compress&cs=tinysrgb&w=600",
+                type: "flower"
+            }
+        ];
+
+        let lists = document.getElementsByClassName("lists")[0];
+        let all = document.getElementById("all");
+        let nature = document.getElementById("nature");
+        let flower = document.getElementById("flower");
+
+       const load=(item = null)=>{
+           lists.innerHTML=""
+            if(item=="all" || item == null){
+                data.forEach(element=>{
+                    createImageElement(element)
+                })
+            }
+            else if(item == "nature"){
+                data.forEach(element=>{
+                    if(element.type == "nature"){
+                        createImageElement(element)
+                    }
+                })
+            }
+            else if(item == "flower"){
+                data.forEach(element=>{
+                    if(element.type == "flower"){
+                        createImageElement(element)
+                    }
+                })
+            }
+       }
+
+        const createImageElement = (element) => {
+            let div = document.createElement("div");
+            div.className = "main";
+
+            let img = document.createElement("img");
+            img.src = element.Image;
+
+            let p = document.createElement("p");
+            p.innerText = element.type;
+
+            lists.appendChild(div);
+            div.appendChild(img);
+            div.appendChild(p);
+        };
+
+        load(); // Initially load all images
+
+        all.addEventListener("click", () => {
+            load("all");
+        });
+
+        nature.addEventListener("click", () => {
+            load("nature");
+        });
+
+        flower.addEventListener("click", () => {
+            load("flower");
+        });
+    </script>
+
+</body>
+
+</html>

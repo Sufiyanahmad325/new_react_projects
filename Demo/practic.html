@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .mybody{
+            height: 100vh;
+            background-color: gray;
+        }
+
+        .container {
+            width: 100vw;
+            padding-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+        }
+
+        .main {
+
+            margin: auto;
+            display: flex;
+            align-items: center;
+            width: 400px;
+            max-height: 200px;
+            background-color: rgb(92, 92, 109);
+            justify-content: space-between;
+            padding: 10px 10px;
+            
+
+
+        }
+
+        .faq{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .btn {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="mybody">
+    <div class="container">
+        <div class="main">
+            <div class="faq">
+                <h3>question</h3>
+                <h4></h4>
+            </div>
+            <button class="btn">V</button>
+        </div>
+        <div class="main">
+            <div class="faq">
+                <h3>question</h3>
+                <h4></h4>
+            </div>
+            <button class="btn">V</button>
+        </div>
+        <div class="main">
+            <div class="faq">
+                <h3>question</h3>
+                <h4></h4>
+            </div>
+            <button class="btn">V</button>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    let faq = [
+        {
+            question:"who the capital of bihar",
+            ans:"patna"
+        },
+        {
+            question:"who is capital of telangana",
+            ans:"hyderabad"
+        },
+        {
+            question:"who is capital of madhya pradesh",
+            ans:"bhopal"
+        },
+    ]
+
+        let h3 = document.getElementsByTagName("h3")
+        let h4 = document.getElementsByTagName("h4")
+        let button = document.getElementsByTagName("button")
+
+    const load = ()=>{
+        for(let i=0 ; i<faq.length; i++){
+            h3[i].innerText = faq[i].question
+        }
+    }
+
+    for(let i=0; i<button.length; i++){
+        button[i].addEventListener("click" , ()=>{
+            if(h4[i].innerText !=""){
+                h4[i].innerText = null
+            }else{
+                h4[i].innerText = faq[i].ans
+            }
+        })
+    }
+
+
+
+    load()
+
+</script>
+</body>
+
+</html>
