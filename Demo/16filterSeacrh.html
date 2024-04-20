@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>typeSearch</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100vw;
+            min-height: 100vh;
+            background-color: gray;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .main {
+            background-color: rgb(41, 41, 56);
+            width: 600px;
+            min-height: 400px;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+
+        }
+
+        .main img {
+            width: 250px;
+            height: 250px;
+            margin-bottom: 10px;
+        }
+
+        .search {
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .search input {
+            padding: 10px 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .search button {
+            padding: 1px 10px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .products {
+            width: 250px;
+            height: 290px;
+            background-color: rgb(120, 120, 84);
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .products div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .products button {
+            background-color: rgb(108, 108, 4);
+            border: none;
+            padding: 2px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="search">
+            <input id="input" type="text" placeholder="Enter Shirt and TShirt" onkeyup="search()">
+        </div>
+
+        <div class="main">
+
+        </div>
+    </div>
+
+    <script>
+
+        const product = [
+            {
+                Image: "https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=600",
+                type: "TShirt",
+                price: "12"
+            },
+            {
+                Image: "https://images.pexels.com/photos/1566412/pexels-photo-1566412.jpeg?auto=compress&cs=tinysrgb&w=600",
+                type: "TShirt",
+                price: "10"
+            },
+            {
+                Image: "https://images.pexels.com/photos/1042140/pexels-photo-1042140.jpeg?auto=compress&cs=tinysrgb&w=400",
+                type: "Shirt",
+                price: "22"
+            },
+            {
+                Image: "https://images.pexels.com/photos/1667077/pexels-photo-1667077.jpeg?auto=compress&cs=tinysrgb&w=400",
+                type: "Shirt",
+                price: "25"
+            },
+        ]
+
+        let main = document.getElementsByClassName("main")[0]
+        let input = document.getElementById("input")
+
+
+
+        const search = () => {
+            mydata = product.filter(element => element.type.toLocaleLowerCase().includes(input.value))
+            console.log(mydata);
+            load(mydata)
+        }
+
+
+        const load = (item = null) => {
+            main.innerHTML = ""
+            if (item === null) {
+                product.forEach(element => {
+
+                    createElement(element)
+                });
+            }
+            else {
+                item.forEach(element => {
+                    createElement(element)
+                })
+            }
+        }
+
+
+
+
+        const createElement = (element) => {
+            let products = document.createElement("div")
+            products.className = "products"
+
+            let img = document.createElement("img")
+            img.src = element.Image
+
+            let div = document.createElement("div")
+
+            let p = document.createElement("p")
+            p.innerText = element.type
+
+            let btn = document.createElement("button")
+            btn.innerText = element.price + "$"
+
+
+            main.appendChild(products)
+
+            products.appendChild(img)
+
+            products.appendChild(div)
+
+            div.appendChild(p)
+            div.appendChild(btn)
+
+
+        }
+
+
+        load()
+
+    </script>
+</body>
+
+</html>
