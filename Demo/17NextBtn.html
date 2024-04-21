@@ -81,8 +81,8 @@
             </div>
         </div>
         <footer>
-            <button onclick="prev()">Prev</button>
-            <button onclick="next()">Next</button>
+            <button id="prev" onclick="prev()">Prev</button>
+            <button id="next" onclick="next()">Next</button>
         </footer>
     </div>
 
@@ -128,12 +128,13 @@
         ]
 
         const below = document.getElementsByClassName("below")[0]
+        document.getElementById("prev").disabled = true;
         let start = 0
         let dataLength = 6
 
 
         const load = (item = null) => {
-            below.innerHTML=""
+            below.innerHTML = ""
             for (let i = start; i < dataLength; i++) {
                 let div = document.createElement("div")
 
@@ -152,13 +153,24 @@
         const prev = () => {
             start = 0
             dataLength = 6
-                load()
+
+            if(start == 0){
+            document.getElementById("next").disabled = false;
+            document.getElementById("prev").disabled = true;
+
+            }
+            load()
         }
 
 
         const next = () => {
-            start=6
-            dataLength=data.length
+            start = 6
+            dataLength = data.length
+            if (start == 6) {
+                document.getElementById("next").disabled = true;
+            document.getElementById("prev").disabled = false;
+
+            }
             load()
         }
 
