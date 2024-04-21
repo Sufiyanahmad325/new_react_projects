@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        .generate-qr-code-btn {
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>QR Code generator</h1>
+    <input type="text" placeholder="type text or use Url" class="qr-text">
+    <div class="qr-container">
+        <button class="generate-qr-code-btn">Generate QR Code</button>
+        <div class="qr"></div>
+    </div>
+
+    <script>
+
+        const qrContainer = document.querySelector(".qr-container")
+        const qrTextInput = document.querySelector(".qr-text")
+        const generateQrCode = document.querySelector(".generate-qr-code-btn")
+        const qr = document.querySelector(".qr")
+
+
+        generateQrCode.addEventListener("click" , ()=>{
+            validateInputField()
+        })
+
+
+        const validateInputField=()=>{
+            qr.innerHTML=""
+
+            //yaha pe qr me qrcode Generete hoga , or object me text hai uske base pe qr banega baki qr ka height and width etc hai 
+           new QRCode(qr , {        //====> qr is a class
+            text:qrTextInput.value,
+            height:200,
+            width:200,
+            colorLight:"white",
+            colorDark:"black"
+           })
+           qrTextInput.value=""
+         
+        }
+
+       
+    </script>
+</body>
+
+</html>
