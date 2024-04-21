@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 100vw;
+            height: 100vh;
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .quote-wrapper{
+            border: 1px solid wheat;
+            width: 50vw;
+            padding: 10px;
+            position: fixed;
+            top: 60%;
+        }
+
+        button{
+            padding: 4px 10px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Quote Generator</h1>
+        <button class="refresh-button">Refresh</button>
+        <div class="quote-wrapper"></div>
+    </div>
+
+    <script>
+
+        const quoteWrapper = document.querySelector(".quote-wrapper")
+        const refreshButton = document.querySelector(".refresh-button")
+
+        
+
+        const fetchRandomQuote=()=>{
+            fetch("https://api.quotable.io/quotes/random").then((response)=>{
+               return response.json()
+            }).then((result)=>{
+                console.log(result);
+                displayQuote(result[0])
+            }).catch((err)=>{
+                console.log(err);
+            })
+        }
+
+
+        function displayQuote(getQuote){
+            console.log(getQuote);
+            quoteWrapper.innerHTML=`
+            <div class="qoute-item">
+                <p>${getQuote.author}</p>
+                <p>${getQuote.content}</p>
+                <p>${getQuote.dateAdded}</p>
+                <p>${getQuote.tags[0]}</p>
+                </div>
+            `
+        }
+
+
+        refreshButton.addEventListener("click" , ()=>{
+            fetchRandomQuote()
+        })
+
+        fetchRandomQuote()
+
+    </script>
+</body>
+</html>
