@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: gray;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .top input {
+            font-size: 18px;
+            padding: 6px 10px;
+            border: none;
+        }
+
+        .top button {
+            padding: 1px 4px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .below {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .below img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .below div {
+            padding: 5px;
+            background-color: rgb(241, 204, 135);
+            font-weight: 600;
+        }
+
+        footer button {
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 3px 6px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="top">
+                <input type="text" placeholder="nothing else work here">
+                <button>Button</button>
+            </div>
+            <div class="below">
+
+            </div>
+        </div>
+        <footer>
+            <button onclick="prev()">Prev</button>
+            <button onclick="next()">Next</button>
+        </footer>
+    </div>
+
+    <script>
+
+        const data = [
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20828519/pexels-photo-20828519/free-photo-of-aerial-view-of-houses-in-the-valley-on-gran-canaria-canary-islands-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20828519/pexels-photo-20828519/free-photo-of-aerial-view-of-houses-in-the-valley-on-gran-canaria-canary-islands-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20828519/pexels-photo-20828519/free-photo-of-aerial-view-of-houses-in-the-valley-on-gran-canaria-canary-islands-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20828519/pexels-photo-20828519/free-photo-of-aerial-view-of-houses-in-the-valley-on-gran-canaria-canary-islands-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20877439/pexels-photo-20877439/free-photo-of-the-city-of-valencia-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20877439/pexels-photo-20877439/free-photo-of-the-city-of-valencia-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+        ]
+
+        const below = document.getElementsByClassName("below")[0]
+        let start = 0
+        let dataLength = 6
+
+
+        const load = (item = null) => {
+            below.innerHTML=""
+            for (let i = start; i < dataLength; i++) {
+                let div = document.createElement("div")
+
+                let img = document.createElement("img")
+                img.src = data[i].Image
+
+                let p = document.createElement("p")
+                p.innerText = "Hello Sir"
+
+                below.appendChild(div)
+                div.appendChild(img)
+                div.appendChild(p)
+            }
+        }
+
+        const prev = () => {
+            start = 0
+            dataLength = 6
+                load()
+        }
+
+
+        const next = () => {
+            start=6
+            dataLength=data.length
+            load()
+        }
+
+        load()
+
+    </script>
+</body>
+
+</html>
