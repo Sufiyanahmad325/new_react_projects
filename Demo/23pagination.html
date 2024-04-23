@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination Example</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination-button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .pagination-button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pagination using JavaScript</h1>
+    <ul class="pagination-list">
+        <!-- Pagination content will be added here -->
+    </ul>
+    <div class="pagination-container">
+        <button class="pagination-button prev-btn">Previous</button>
+        <button class="pagination-button next-btn">Next</button>
+    </div>
+
+    <script>
+
+
+        const paginationList = document.querySelector(".pagination-list");
+        const prevBtn = document.querySelector(".prev-btn");
+        const nextBtn = document.querySelector(".next-btn");
+
+        let data = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
+
+        let start = 0
+        let end = 10
+
+        const updatePagination = () => {
+            paginationList.innerHTML = ""
+
+            let myNewData = data.slice(start, end)
+
+
+            myNewData.forEach(Element => {
+                let a = document.createElement("li")
+                a.innerText = Element
+                paginationList.appendChild(a)
+            })
+        }
+
+
+
+
+
+        nextBtn.addEventListener("click", () => {
+            if (end < data.length) {
+                start += 10
+                end += 10
+                updatePagination();
+            }
+        });
+
+
+
+        prevBtn.addEventListener("click", () => {
+                if(end>10){
+                    start-=10
+                    end-=10
+                    updatePagination()
+                }
+        })
+
+
+
+
+
+
+
+        updatePagination()
+    </script>
+</body>
+
+</html>
