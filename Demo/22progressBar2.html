@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            max-width: 400px;
+            width: 100%;
+
+        }
+
+        .main {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .circle {
+            height: 50px;
+            width: 50px;
+            border: 4px solid rgb(163, 157, 157);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #3c3636;
+            font-weight: 600;
+            font-size: 18px;
+            background-color: rgb(243, 239, 233);
+        }
+
+        .circle.active{
+            color: rgb(85, 85, 255);
+            border: 4px solid rgb(104, 104, 253);
+        }
+
+        .progress-bar {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background-color: rgb(151, 151, 175);
+            z-index: -1;
+        }
+
+        .indicator {
+            height: 100%;
+            width: 0%;
+            position: absolute;
+            transition: all 0.4s ease-in;
+            background-color: rgb(79, 79, 255);
+        }
+
+        button{
+            background-color: rgb(62, 62, 248);
+            padding: 11px 14px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            font-weight: 600;
+        }
+
+        button:disabled{
+            background-color: rgb(135, 135, 226);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <span class="circle active">1</span>
+            <span class="circle">2</span>
+            <span class="circle">3</span>
+            <span class="circle">4</span>
+
+            <div class="progress-bar">
+                <span class="indicator"></span>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button id="prev" disabled>Prev</button>
+            <button id="next" >Next</button>
+        </div>
+    </div>
+
+
+    <script>
+
+        let bar = document.querySelector(".indicator")
+        let circles = document.querySelectorAll(".circle")
+        let buttons = document.querySelectorAll("button")
+
+        let load=1
+
+        const updateBar=(e)=>{
+            e.target.id === "next" ? ++load : --load
+
+          circles.forEach((element,index)=>{
+            element.classList[`${index<load ? "add" : "remove"}`]("active")
+          })
+
+
+           bar.style.width = `${((load - 1) / (circles.length - 1)) * 100}%`
+
+
+           if(1<load){
+            buttons[0].disabled=false
+           }else if(load ==1){
+            buttons[0].disabled=true
+           }
+
+           if(load == 4){
+            buttons[1].disabled=true
+        }else{
+               buttons[1].disabled=false
+           }
+
+
+        //    const updateBar = (e) => {
+        //     e.target.id === "next" ? ++load : --load;
+        //     circles.forEach((Element, index) => {
+        //         Element.classList[index < load ? "add" : "remove"]("active");
+        //     });
+        //     bar.style.width = `${((load - 1) / (circles.length - 1)) * 100}%`;
+        // };
+
+            
+
+        }
+
+
+        buttons.forEach(element=>{
+            element.addEventListener("click" , updateBar)
+        })
+        
+
+    </script>
+</body>
+
+</html>
