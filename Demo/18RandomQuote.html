@@ -49,7 +49,8 @@
         
 
         const fetchRandomQuote=()=>{
-            fetch("https://api.quotable.io/quotes/random").then((response)=>{
+            fetch("https://api.quotable.io/quotes/random")
+            .then((response)=>{
                return response.json()
             }).then((result)=>{
                 console.log(result);
