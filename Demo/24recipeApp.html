@@ -205,21 +205,20 @@
                 data.recipes.filter(Element => {
                     if (Element.id === getId) {
                         findData = Element
+                        console.log(Element);
                     }
                 })
 
                 return findData
             })
 
-
-            console.log(response, "lksjflkajsflkjslfja");
-            if (response) {
+            if (findData) {
                 window.scrollTo({
                     top: document.body.scrollHeight,
                     behavior: "smooth"
                 })
 
-                displayRecipeDetailsData(response)
+                displayRecipeDetailsData(findData)
             }
 
 
