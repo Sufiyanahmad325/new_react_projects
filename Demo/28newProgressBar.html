@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: aqua;
+        }
+
+        .container {
+
+            max-width: 400px;
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .boxs {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            height: 100%;
+            align-items: center;
+
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            border: 5px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            position: relative;
+            background-color: aqua;
+        }
+
+        .box.active{
+            border: 5px solid gray;
+            transition: all 0.2s ease-in;
+        }
+
+        .progressbar {
+            background-color: aliceblue;
+            width: 100%;
+            height: 6px;
+            position: absolute;
+            z-index: -1;
+
+        }
+
+        .progress {
+            width: 00%;
+            height: 6px;
+            background-color: gray;
+            transition: all 0.2s ease-in;
+        }
+
+        button {
+
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            margin: auto;
+        }
+
+        button:disabled{
+            background-color: rgb(179, 219, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="boxs">
+            <div class="box active">1</div>
+            <div class="box">2</div>
+            <div class="box">3</div>
+            <div class="box">4</div>
+            <div class="progressbar">
+                <div class="progress"></div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="prev" id="prev" disabled>prev</button>
+            <button class="next" id="next">next</button>
+        </div>
+    </div>
+
+    <script>
+
+        let progress = document.querySelector(".progress")
+        let buttons = document.querySelectorAll("button")
+        let box = document.querySelectorAll(".box")
+
+
+        let result = 0
+
+        const load = (id) => {
+            id === "next" ? result++ : result--
+
+            box.forEach((Element , index)=>{
+                if(index<=result){
+                    Element.classList.add("active")
+                }else{
+                    Element.classList.remove("active")
+                }
+            })
+
+
+            progress.style.width= `${((result) / (box.length-1))*100}%`
+
+           if(result===0){
+            buttons[0].disabled=true
+           }else if(result === 3){
+            buttons[1].disabled=true
+           }else{
+            buttons[0].disabled=false
+            buttons[1].disabled=false
+           }
+
+        }
+
+
+
+
+        buttons.forEach(Element => {
+            Element.addEventListener("click", (e) => {
+                console.log(1);
+                load(e.target.id)
+            })
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

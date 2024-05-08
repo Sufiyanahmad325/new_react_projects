@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn{
+
+            padding: 4px 10px;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn" onclick="change()">change</button>
+
+    <script>
+
+        const genrate =()=>{
+            let a = "0123456789ABCDEF"
+            let b ="#"
+
+            for(let i=0 ; i<6 ; i++){
+                b+=a[Math.floor(Math.random() * 16)]
+            }
+            return b
+        }
+
+        const change =()=>{
+            let genrate1 = genrate()
+            document.body.style.backgroundColor=genrate1
+            
+
+        }
+
+    </script>
+    
+</body>
+</html>
