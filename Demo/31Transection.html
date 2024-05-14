@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+        }
+        .container {
+          max-width: 600px;
+          margin: 20px auto;
+          padding: 20px;
+          background-color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+          text-align: center;
+        }
+        input[type="text"], select, input[type="number"] {
+          width: 100%;
+          padding: 10px;
+          margin: 5px 0;
+          box-sizing: border-box;
+        }
+        button {
+          width: 100%;
+          padding: 10px;
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #45a049;
+        }
+        .transaction-list {
+          margin-top: 20px;
+          border-top: 1px solid #ccc;
+          padding-top: 20px;
+        }
+        .transaction {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        }
+        .transaction .name {
+          flex: 1;
+        }
+        .transaction .amount {
+          margin-left: 20px;
+        }
+        .total {
+          font-weight: bold;
+          margin-top: 20px;
+        }
+      </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Budget Tracker</h2>
+        <label for="transaction-name">Transaction Name:</label>
+        <input type="text" id="transaction-name" placeholder="Enter transaction name">
+      
+        <label for="transaction-type">Transaction Type:</label>
+        <select id="transaction-type">
+          <option value="income">Income</option>
+          <option value="expense">Expense</option>
+        </select>
+      
+        <label for="transaction-amount">Amount:</label>
+        <input type="number" id="transaction-amount" placeholder="Enter amount">
+      
+        <button onclick="addTransaction()">Add Transaction</button>
+      
+        <div class="transaction-list" id="transaction-list">
+          <!-- Transaction list will be displayed here -->
+        </div>
+      
+        <div class="total" id="total">
+          <!-- Total balance will be displayed here -->
+        </div>
+      </div>
+
+
+      <script>
+
+          let transactions=[]
+
+        const addTransaction =()=>{
+            let name = document.querySelector("#transaction-name").value
+            let type = document.querySelector("#transaction-type").value
+            let income = document.querySelector("#transaction-amount").value
+
+            let transaction ={name , type , income}
+            transactions.push(transaction)
+
+            updateTransactionList();
+            updateTotal()
+        }
+
+
+        const updateTransactionList=()=>{
+            const transactionList = document.getElementById("transaction-list");
+            transactionList.innerHTML = ""
+            transactions.forEach((Element,index)=>{
+                let item = document.createElement("item")
+                item.classList.add("transaction");
+                item.innerHTML=`
+                <span class="name">${Element.name}</span>
+                <span class="amount">${Element.type =="income" ? "+":"-"}$${Element.income}</span>
+                `
+               transactionList.appendChild(item)
+            })
+        }
+        
+        
+        const updateTotal=()=>{
+            
+            let totalIncome = 0
+            let totalExpense = 0
+
+                transactions.forEach(Element=>{
+                    if(Element.type === "income"){
+                        totalIncome += Number(Element.income)
+                    }else{
+                        totalExpense +=Number(Element.income)
+                    }
+                })
+
+                let total = totalIncome - totalExpense
+                let mytotal = document.querySelector(".total")
+                mytotal.textContent = `Total balance $${total.toFixed(2)}`
+
+
+            }
+
+
+      </script>
+</body>
+</html>
