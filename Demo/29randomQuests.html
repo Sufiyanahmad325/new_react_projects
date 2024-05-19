@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .box {
+            width: 400px;
+            height: 300px;
+            background-color: gray;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px black;
+        }
+
+        .btn {
+            padding: 8px 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgb(160, 160, 250);
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box"></div>
+        <button class="btn" onclick="generate()">Genrate</button>
+    </div>
+
+    <script>
+        const quests = [
+            "The Lost Artifact: Players must venture into a dangerous jungle to retrieve a powerful ancient artifact before it falls into the wrong hands.",
+            "Rescue Mission: A group of villagers has been captured by a band of ruthless pirates. The players must infiltrate the pirates' stronghold and rescue the hostages.",
+            "The Cursed Tome: Legends speak of a cursed tome hidden deep within a haunted library. The players must navigate its treacherous halls and retrieve the tome before its dark powers are unleashed.",
+            "The Fey Wilds: A portal to the mysterious Fey Wilds has opened, and creatures from that realm are wreaking havoc on the surrounding countryside. The players must enter the Fey Wilds, navigate its enchanting but dangerous landscapes, and close the portal before it's too late.",
+            "The Dragon's Hoard: A fearsome dragon has been terrorizing the kingdom, hoarding its treasures in a remote mountain cave. The players must gather their courage, brave the dragon's lair, and reclaim the stolen riches for the kingdom.",
+            "The Forbidden Temple: Deep in the heart of a forbidden jungle lies an ancient temple filled with traps and guardians. The players must decipher its mysteries and unlock its secrets before a dark cult uses its power for nefarious purposes.",
+            "The Missing Heir: The rightful heir to the throne has gone missing, and chaos threatens to engulf the kingdom. The players must track down the missing heir, uncovering a web of intrigue and betrayal along the way.",
+            "The Elemental Crystals: Elemental crystals, vital to maintaining balance in the world, have been stolen by a group of rogue mages. The players must retrieve the crystals before the elements spiral out of control.",
+            "The Curse of the Werewolf: A small village is plagued by a series of brutal attacks under the light of the full moon. The players must uncover the truth behind the curse and put an end to the werewolf's reign of terror.",
+            "The Astral Gate: A powerful artifact known as the Astral Gate has been unearthed, capable of opening portals to other realms. The players must prevent it from falling into the hands of those who would use it to unleash chaos upon the world."
+        ]
+
+        let box = document.querySelector(".box")
+
+        const generate=()=>{
+                let num = Math.floor(Math.random() * quests.length)
+                box.innerText = quests[num]
+        }
+        generate()
+
+    </script>
+</body>
+
+</html>
