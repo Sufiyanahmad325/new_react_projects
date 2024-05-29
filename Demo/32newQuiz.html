@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .answers {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .answers li {
+            margin-bottom: 10px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question" id="question"></div>
+        <ul class="answers" id="answers"></ul>
+        <button class="button" id="next-btn">Next</button>
+        <div class="hidden" id="result"></div>
+        
+    </div>
+    <script>
+        const quizData = [
+            {
+                question: "What is the capital of France?",
+                answers: ["Berlin", "Madrid", "Paris", "Lisbon"],
+                correct: "Paris"
+            },
+            {
+                question: "Who wrote 'To Kill a Mockingbird'?",
+                answers: ["Harper Lee", "Mark Twain", "Jane Austen", "J.K. Rowling"],
+                correct: "Harper Lee"
+            },
+            {
+                question: "What is the largest planet in our Solar System?",
+                answers: ["Earth", "Mars", "Jupiter", "Saturn"],
+                correct: "Jupiter"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const questionEl = document.getElementById('question');
+        const answersEl = document.getElementById('answers');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultEl = document.getElementById('result');
+
+
+        const loadQuestion = ()=>{
+            if(currentQuestionIndex < quizData.length){
+
+                questionEl.innerHTML =""
+                answersEl.innerHTML=''
+                    questionEl.innerText = quizData[currentQuestionIndex].question
+                    quizData[currentQuestionIndex].answers.forEach(element => {
+                        let myLi = document.createElement("li")
+    
+                       myLi.innerHTML= `<label> 
+                        <input type="radio" name="answer" value="${element}">
+                        ${element}
+                    </label>`;
+    
+                    answersEl.appendChild(myLi)
+                    });
+            }else{
+                console.log(score)
+                resultEl.innerHTML=  `<p>${score} / ${quizData.length}</p>`
+            }
+        }
+
+
+        nextBtn.addEventListener("click" , ()=>{
+                let ans = checkAnswer()
+                if(ans == quizData[currentQuestionIndex].correct){
+                    score++
+                }
+                currentQuestionIndex++
+                loadQuestion()
+            
+        })
+
+        const checkAnswer =()=>{
+            let inputs = document.querySelectorAll("input")
+            let ans = ''
+            inputs.forEach(inputEle=>{
+                if(inputEle.checked){
+                     ans = inputEle.value
+                }
+            })
+            return ans
+        }
+
+        loadQuestion()
+    </script>
+</body>
+</html>
