@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+            
+        }
+
+        .submit{
+            padding: 10px 15px;
+            margin: auto;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="quiz">
+            <h2 class="questions">who is the capital of india</h2>
+            <div class="quizContainer">
+                <input type="radio" name="option" id="1">
+                <label for="1">options</label>
+            </div>
+
+            <div class="quizContainer">
+                <input type="radio" name="option" id="2">
+                <label for="2">options</label>
+            </div>
+
+            <div class="quizContainer">
+                <input type="radio" name="option" id="3">
+                <label for="3">options</label>
+            </div>
+
+        </div>
+
+        <div class="quiz">
+            <h2 class="questions">who is the capital of india</h2>
+            <div class="quizContainer">
+                <input type="radio" name="option2" id="4">
+                <label for="4">options</label>
+            </div>
+
+            <div class="quizContainer">
+                <input type="radio" name="option2" id="5">
+                <label for="5">options</label>
+            </div>
+
+            <div class="quizContainer">
+                <input type="radio" name="option2" id="6">
+                <label for="6">options</label>
+            </div>
+
+        </div>
+
+        <div class="quiz">
+            <h2 class="questions">who is the capital of india</h2>
+            <div class="quizContainer">
+                <input type="radio" name="option3" id="7">
+                <label for="7">options</label>
+            </div>
+
+            <div class="quizContainer">
+                <input type="radio" name="option3" id="8">
+                <label for="8">options</label>
+            </div>
+
+            <div class="quizContainer">
+                <input type="radio" name="option3" id="9">
+                <label for="9">options</label>
+            </div>
+
+        </div>
+
+        <input type="submit" class="submit" onclick="submit()">
+
+    </div>
+
+    <script>
+
+const quizQuestions = [
+        {
+            question: "What is the capital of France?",
+            answers: {
+                a: "Berlin",
+                b: "Madrid",
+                c: "Paris"
+            },
+            correctAnswer: "c"
+        },
+        {
+            question: "Who is the CEO of Tesla?",
+            answers: {
+                a: "Jeff Bezos",
+                b: "Elon Musk",
+                c: "Bill Gates"
+            },
+            correctAnswer: "b"
+        },
+        {
+            question: "What is the smallest planet in our solar system?",
+            answers: {
+                a: "Mercury",
+                b: "Mars",
+                c: "Venus"
+            },
+            correctAnswer: "a"
+        }
+    ]; 
+
+
+    let questions = document.querySelectorAll(".questions")
+    let quiz = document.querySelectorAll(".quiz")
+    let label = document.querySelectorAll("label")
+
+
+    let currenctQuestion = 0
+    let score = 0
+
+
+    quizQuestions.forEach((Element ,index)=>{
+            questions[index].innerText = Element.question
+
+            let answerKey = Object.keys(Element.answers)
+
+            answerKey.forEach((ele , ind)=>{
+                 quiz[index].querySelectorAll("input")[ind].value=ele
+                 quiz[index].querySelectorAll("label")[ind].innerText= Element.answers[ele]
+                
+            })
+
+            
+
+
+            
+    })
+
+    const submit =()=>{
+        quiz.forEach((element ,index) => {
+            element.querySelectorAll("input").forEach((item , ind)=>{
+                if(item.checked){
+                    if(item.value == quizQuestions[index].correctAnswer){
+                        score++
+                    }
+                }
+            })
+        });
+        displayScore()
+
+    }
+
+
+    const displayScore=()=>{
+        document.querySelector(".container").innerText = `
+        ${score} / ${quizQuestions.length}
+        `
+    }
+
+    </script>
+
+
+
+
+</body>
+
+</html>
+
