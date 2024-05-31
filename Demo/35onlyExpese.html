@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        h1 {
+            height: 10vh;
+            width: 100vw;
+            background-color: rgb(16, 226, 135);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .main {
+            width: 100vw;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding-top: 30px;
+        }
+
+        .main .myInput {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+
+        .main .myInput input {
+            width: 80vw;
+            height: 22px;
+            padding: 16px 10px;
+        }
+
+        .main .myInput input::placeholder {
+            color: rgb(138, 80, 9);
+            font-size: 14px;
+        }
+
+        .main .myInput input:focus {
+            outline: yellow 2px solid;
+        }
+
+        .btn {
+            padding: 6px 16px;
+            border-radius: 5px;
+
+        }
+
+        footer {
+            height: 10vh;
+            background-color: rgb(16, 226, 135);
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .data li {
+            text-decoration: none;
+            list-style: none;
+            font-size: 20px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Personal Budget Tracker</h1>
+
+        <div class="main">
+            <h2>Add Expense</h2>
+
+            <div class="myInput">
+                <label for="Expense-Name">Expense Name : </label>
+                <input type="text" id="Expense-Name" placeholder="Enter name here">
+            </div>
+
+            <div class="myInput">
+                <label for="Amount">Amount : </label>
+                <input type="number" id="Amount" placeholder="Enter amount here">
+            </div>
+
+            <input type="submit" value="Add" class="btn" onclick="submit()">
+
+
+            <p>Expense</p>
+
+            <div class="data">
+
+            </div>
+            <h2 id="total">Total Expense: $0</h2>
+
+        </div>
+
+        <footer>
+            <p> &copy;2024 your name All right reserved </p>
+        </footer>
+    </div>
+
+    <script>
+
+
+
+        let data = []
+
+        const submit = () => {
+            let expenseName = document.getElementById("Expense-Name").value
+            let amount = document.getElementById("Amount").value
+
+
+            if (expenseName !== "" && amount > 0) {
+                data.push({ expenseName, amount })
+                displayData()
+                document.getElementById("Expense-Name").value = ""
+                document.getElementById("Amount").value = ""
+            } else {
+                alert("enter your name and expense")
+            }
+
+        }
+
+        const displayData = () => {
+
+            let dataContainer = document.querySelector(".data")
+
+            dataContainer.innerHTML=""
+            let total = 0
+
+            data.forEach((item)=>{
+               let li = document.createElement("li")
+               li.innerText = ` ${item.expenseName}: $${item.amount}`
+               dataContainer.appendChild(li)
+               total += Number(item.amount)
+            })
+
+            document.getElementById("total").innerText=`Total Expense : $${total}`
+
+        }
+
+
+    </script>
+</body>
+
+</html>
