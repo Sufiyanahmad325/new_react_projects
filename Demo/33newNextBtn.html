@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: gray;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .top input {
+            font-size: 18px;
+            padding: 6px 10px;
+            border: none;
+        }
+
+        .top button {
+            padding: 1px 4px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .below {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .below img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .below div {
+            padding: 5px;
+            background-color: rgb(241, 204, 135);
+            font-weight: 600;
+        }
+
+        footer button {
+            margin-top: 10px;
+            margin-right: 10px;
+            padding: 3px 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="top">
+                <input type="text" placeholder="nothing else work here">
+                <button>Button</button>
+            </div>
+            <div class="below">
+
+            </div>
+        </div>
+        <footer>
+            <button id="prev" onclick="prev()">Prev</button>
+            <button id="next" onclick="next()">Next</button>
+        </footer>
+    </div>
+    <script>
+
+
+const data = [
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20522444/pexels-photo-20522444/free-photo-of-a-person-walking-through-the-snow-in-front-of-mountains.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20828519/pexels-photo-20828519/free-photo-of-aerial-view-of-houses-in-the-valley-on-gran-canaria-canary-islands-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20828519/pexels-photo-20828519/free-photo-of-aerial-view-of-houses-in-the-valley-on-gran-canaria-canary-islands-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20828519/pexels-photo-20828519/free-photo-of-aerial-view-of-houses-in-the-valley-on-gran-canaria-canary-islands-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20828519/pexels-photo-20828519/free-photo-of-aerial-view-of-houses-in-the-valley-on-gran-canaria-canary-islands-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20877439/pexels-photo-20877439/free-photo-of-the-city-of-valencia-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+            {
+                Image: "https://images.pexels.com/photos/20877439/pexels-photo-20877439/free-photo-of-the-city-of-valencia-spain.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+            },
+        ]
+
+
+        let below = document.querySelector(".below")
+        document.getElementById("prev").disabled=true
+
+        let start = 0
+        let end = 6
+
+        const myData = []
+
+        const load = ()=>{
+            below.innerHTML=''
+            let mainData =data.slice(start,end)
+            mainData.forEach(Element=>{
+                let div = document.createElement("div")
+
+                let img = document.createElement("img")
+                img.src=Element.Image
+
+                let p = document.createElement("p")
+                p.innerText="hello sir"
+
+                div.appendChild(img)
+                div.appendChild(p)
+                below.appendChild(div)
+            })
+        }
+
+
+       let prev =()=>{
+        if(end == data.length){
+            start -= 6
+            end -= 6
+            load()
+        }
+
+        if(end == 6){
+            document.getElementById("next").disabled=false
+            document.getElementById("prev").disabled=true
+        }
+       }
+
+
+       const next=()=>{
+        if(end<data.length){
+            start +=6
+            end +=6
+            load()
+        }
+        if(end== data.length){
+            document.getElementById("next").disabled=true
+            document.getElementById("prev").disabled=false
+        }
+            
+       }
+
+
+
+       load()
+
+    </script>
+</body>
+</html>
