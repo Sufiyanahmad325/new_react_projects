@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            height: 100vh;
+            background-color: rgb(65, 98, 15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main {
+            width: 500px;
+            height: 30vh;
+            background-color: gray;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .question {
+            font-size: 24px;
+            color: white;
+            font-weight: 600;
+        }
+
+        button {
+            padding: 8px 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .answers {
+            display: flex;
+            gap: 10px;
+        }
+
+        .submit {
+            background-color: rgb(12, 159, 66);
+            font-weight: 600;
+            padding: 12px 22px;
+            color: white;
+        }
+
+        button:disabled {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="question"></div>
+            <div class="answers">
+                <button class="button">hello</button>
+                <button class="button">hello</button>
+                <button class="button">hello</button>
+                <button class="button">hello</button>
+            </div>
+            <button class="submit" onclick=submit()>next</button>
+
+        </div>
+    </div>
+
+    <script>
+
+        const quiz = [
+            {
+                question: "What is the capital of France?",
+                answers: [
+                    { text: "Berlin", correct: false },
+                    { text: "Madrid", correct: false },
+                    { text: "Paris", correct: true },
+                    { text: "Lisbon", correct: false }
+                ]
+            },
+            {
+                question: "Which planet is known as the Red Planet?",
+                answers: [
+                    { text: "Earth", correct: false },
+                    { text: "Mars", correct: true },
+                    { text: "Jupiter", correct: false },
+                    { text: "Saturn", correct: false }
+                ]
+            },
+            {
+                question: "What is the largest ocean on Earth?",
+                answers: [
+                    { text: "Atlantic Ocean", correct: false },
+                    { text: "Indian Ocean", correct: false },
+                    { text: "Southern Ocean", correct: false },
+                    { text: "Pacific Ocean", correct: true }
+                ]
+            }
+        ];
+
+        let currenctIndex = 0;
+        let score = 0
+        const questionCon = document.querySelector(".question")
+        const allButtons = document.querySelectorAll(".button")
+
+        const loadQuestion = () => {
+            allButtons.forEach(Element => Element.disabled = false)
+            questionCon.innerText = quiz[currenctIndex].question
+
+            quiz[currenctIndex].answers.forEach((ele, index) => {
+                allButtons[index].innerText = ele.text
+                allButtons[index].onclick = () => checkAns(ele);
+            })
+        }
+
+        
+        const checkAns = (data) => {
+            if (data.correct) {
+                score++
+            }
+            console.log(data)
+            allButtons.forEach((ele, ind) => {
+                ele.disabled = true
+                if (ele.innerText == data.text) {
+                    ele.style.backgroundColor = data.correct ? "green" : "red"
+                }
+            })
+        }
+
+        const submit = () => {
+
+            if (currenctIndex < quiz.length - 1) {
+                currenctIndex++
+                checkRemove()
+                loadQuestion()
+            } else {
+                document.querySelector(".main").innerHTML = `
+                <h2>${score} / ${quiz.length}</h2>
+                `
+            }
+        }
+
+        function checkRemove() {
+            allButtons.forEach(ele => {
+                ele.style.backgroundColor = "white"
+            })
+        }
+
+
+
+        loadQuestion()
+
+
+    </script>
+</body>
+
+</html>
