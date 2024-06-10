@@ -110,7 +110,144 @@
         <button id="restart">Restart Game</button>
     </div>
     <script>
-       
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const gameBoard = document.getElementById('game-board');
+            const movesCounter = document.getElementById('moves');
+            const timeCounter = document.getElementById('time');
+            const restartButton = document.getElementById('restart');
+
+
+
+        const cardValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+        let cards = [];
+        let moves = 0;
+        let timer;
+        let time = 0;
+        let firstCard , SecondCard
+        let lockBoard = false;
+        let matchedPairs = 0;
+
+
+
+
+
+        function startGame() {
+            gameBoard.innerHTML = '';
+            moves = 0;
+            time = 0;
+            matchedPairs = 0;
+            movesCounter.textContent = moves;
+            timeCounter.textContent = time;
+            timer = setInterval(updateTime, 1000);
+
+            cards = [...cardValues, ...cardValues]
+            .sort(() => 0.5 - Math.random())
+                .map(value => createCard(value));
+
+                cards.forEach(card=>{
+                    gameBoard.appendChild(card)
+                })
+        }
+
+
+
+
+        function createCard(value){
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.value = value;
+
+            card.innerHTML = `
+            <div class="front"></div>
+            <div class="back">${value}</div>
+        `;
+
+        card.addEventListener("click" , flipCard)
+            return card
+
+        }
+
+
+
+        function flipCard(){
+          if(lockBoard) return;
+          if(this === firstCard) return;
+
+          this.classList.add('flipped');
+
+          if(!firstCard){
+            firstCard=this;
+            return
+          }
+
+          SecondCard = this
+          lockBoard = true 
+
+          checkForMatch()
+        }
+
+
+
+
+
+        function checkForMatch(){
+            let isMatch = firstCard.dataset.value === SecondCard.dataset.value
+
+            if(isMatch){
+                disabledCards();
+                matchedPairs++;
+
+                if(matchedPairs === cardValues.length){
+                    setTimeout(endGame ,500)
+                }
+            }else{
+                unflipCards()
+            }
+
+            moves++;
+            movesCounter.textContent =moves
+        }
+
+
+    
+
+        function disabledCards(){
+            firstCard.removeEventListener("click" , flipCard)
+            SecondCard.removeEventListener("click" , flipCard)
+
+            resetBoard()
+        }
+
+
+         function unflipCards(){
+                    setTimeout(() => {
+                        firstCard.classList.remove("flipped")
+                        SecondCard.classList.remove("flipped")
+                        resetBoard()
+                    }, 1000);
+         }
+
+
+         function resetBoard(){
+            [firstCard , SecondCard , lockBoard] = [null , null , null]
+         }
+
+
+         function updateTime() {
+                time++;
+                timeCounter.textContent = time;
+            }
+
+            function endGame() {
+                clearInterval(timer);
+                alert(`Congratulations! You completed the game in ${moves} moves and ${time} seconds.`);
+            }
+
+            restartButton.addEventListener('click' , startGame)
+
+        startGame()
+    })
     </script>
 </body>
 
