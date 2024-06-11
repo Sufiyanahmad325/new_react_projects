@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Game</title>
+    <title>Document</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -109,145 +109,140 @@
         <div class="game-board" id="game-board"></div>
         <button id="restart">Restart Game</button>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+
+        document.addEventListener("DOMContentLoaded", function () {
 
             const gameBoard = document.getElementById('game-board');
             const movesCounter = document.getElementById('moves');
             const timeCounter = document.getElementById('time');
             const restartButton = document.getElementById('restart');
 
+            let cardValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+            let cards = []
+            let moves = 0
+            let time = 0
+            let matchedPairs =0
+            let firstCard, SecondCard
+            let lockBoard = false
+            let timer 
+           
+
+            function startGame() {
+                clearInterval(timer)
+                gameBoard.innerHTML = ""
+                 moves = 0
+                 time = 0
+                matchedPairs =0
+                movesCounter.innerText = moves
+                timeCounter.innerText = time
+                timer = setInterval(updateTime , 1000)
+
+                
+                cards = [...cardValues, ...cardValues]
+                    .sort(() => 0.5 - Math.random())
+                    .map((value) => createCard(value))
+
+               
+            }
 
 
-        const cardValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-        let cards = [];
-        let moves = 0;
-        let timer;
-        let time = 0;
-        let firstCard , SecondCard
-        let lockBoard = false;
-        let matchedPairs = 0;
+            function createCard(value) {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.value = value;
+
+                card.innerHTML = `
+                 <div class="front"></div>
+                 <div class="back">${value}</div> `;
+
+                card.addEventListener("click", flipCard)
+                gameBoard.appendChild(card)
 
 
+            }
 
 
+            function flipCard() {
+                if(lockBoard) return
+                if(this == firstCard) return
 
-        function startGame() {
-            gameBoard.innerHTML = '';
-            moves = 0;
-            time = 0;
-            matchedPairs = 0;
-            movesCounter.textContent = moves;
-            timeCounter.textContent = time;
-            timer = setInterval(updateTime, 1000);
+                this.classList.add('flipped')
 
-            cards = [...cardValues, ...cardValues]
-            .sort(() => 0.5 - Math.random())
-                .map(value => createCard(value));
-
-                cards.forEach(card=>{
-                    gameBoard.appendChild(card)
-                })
-        }
-
-
-
-
-        function createCard(value){
-            const card = document.createElement('div');
-            card.classList.add('card');
-            card.dataset.value = value;
-
-            card.innerHTML = `
-            <div class="front"></div>
-            <div class="back">${value}</div>
-        `;
-
-        card.addEventListener("click" , flipCard)
-            return card
-
-        }
-
-
-
-        function flipCard(){
-          if(lockBoard) return;
-          if(this === firstCard) return;
-
-          this.classList.add('flipped');
-
-          if(!firstCard){
-            firstCard=this;
-            return
-          }
-
-          SecondCard = this
-          lockBoard = true 
-
-          checkForMatch()
-        }
-
-
-
-
-
-        function checkForMatch(){
-            let isMatch = firstCard.dataset.value === SecondCard.dataset.value
-
-            if(isMatch){
-                disabledCards();
-                matchedPairs++;
-
-                if(matchedPairs === cardValues.length){
-                    setTimeout(endGame ,500)
+                if(!firstCard){
+                    firstCard = this
+                    return
                 }
-            }else{
-                unflipCards()
+
+                SecondCard = this
+                lockBoard = true
+
+                checkForMatch()
             }
 
-            moves++;
-            movesCounter.textContent =moves
-        }
 
 
-    
 
-        function disabledCards(){
-            firstCard.removeEventListener("click" , flipCard)
-            SecondCard.removeEventListener("click" , flipCard)
+            function checkForMatch(){
+                isMatch = firstCard.dataset.value === SecondCard.dataset.value
 
-            resetBoard()
-        }
+                if(isMatch){
+                    disabledCards()
+                    matchedPairs++
+                    if(matchedPairs === cardValues.length){
+                        endGame()
+                    }
+                }else{
+                    unflipCards()
+                }
 
-
-         function unflipCards(){
-                    setTimeout(() => {
-                        firstCard.classList.remove("flipped")
-                        SecondCard.classList.remove("flipped")
-                        resetBoard()
-                    }, 1000);
-         }
-
-
-         function resetBoard(){
-            [firstCard , SecondCard , lockBoard] = [null , null , null]
-         }
-
-
-         function updateTime() {
-                time++;
-                timeCounter.textContent = time;
+                moves++
+                movesCounter.innerText = moves
             }
 
-            function endGame() {
-                clearInterval(timer);
-                alert(`Congratulations! You completed the game in ${moves} moves and ${time} seconds.`);
+
+
+
+            function disabledCards(){
+                firstCard.removeEventListener("click" ,flipCard )
+                SecondCard.removeEventListener("click" , flipCard)
+                resetBoard()
             }
 
-            restartButton.addEventListener('click' , startGame)
+            function unflipCards(){
+                setTimeout(()=>{
+                    firstCard.classList.remove('flipped')
+                    SecondCard.classList.remove('flipped')
+                    resetBoard()
+                },1000)
+            }
 
-        startGame()
-    })
+            function resetBoard(){
+                [firstCard , SecondCard , lockBoard] = [null , null , null]
+            }
+
+
+
+            function endGame(){
+                clearInterval(timer)
+                alert(`Congratulations! You completed the game in ${moves} moves and ${time} seconds.`)
+            }
+
+
+
+
+            function updateTime(){
+                time++
+                timeCounter.innerText=time
+            }
+
+            restartButton.addEventListener("click" , startGame)
+
+            startGame()
+        })
+
+
     </script>
 </body>
 
