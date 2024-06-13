@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #87CEEB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+#city-input {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#get-weather-button {
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#get-weather-button:hover {
+    background-color: #0056b3;
+}
+
+#weather-display {
+    display: none;
+}
+
+#weather-display h2 {
+    margin: 0;
+}
+
+#weather-display p {
+    margin: 5px 0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <div class="input-container">
+            <input type="text" id="city-input" placeholder="Enter city name">
+            <button id="get-weather-button">Get Weather</button>
+        </div>
+        <div id="weather-display">
+            <h2 id="city-name"></h2>
+            <p id="temperature"></p>
+            <p id="weather-description"></p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const cityInput = document.getElementById('city-input');
+    const getWeatherButton = document.getElementById('get-weather-button');
+    const weatherDisplay = document.getElementById('weather-display');
+    const cityNameElement = document.getElementById('city-name');
+    const temperatureElement = document.getElementById('temperature');
+    const weatherDescriptionElement = document.getElementById('weather-description');
+
+    getWeatherButton.addEventListener('click', () => {
+        const city = cityInput.value.trim();
+        if (city !== '') {
+            getWeather(city);
+            cityInput.value = '';
+        }
+    });
+
+    async function getWeather(city) {
+        const apiKey = 'YOUR_API_KEY'; // Replace with your actual API key from OpenWeatherMap
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error('City not found');
+            }
+            const data = await response.json();
+            displayWeather(data);
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+
+    function displayWeather(data) {
+        const { name } = data;
+        const { temp } = data.main;
+        const { description } = data.weather[0];
+
+        cityNameElement.textContent = name;
+        temperatureElement.textContent = `Temperature: ${temp}°C`;
+        weatherDescriptionElement.textContent = `Description: ${description}`;
+
+        weatherDisplay.style.display = 'block';
+    }
+});
+
+    </script>
+</body>
+</html>
