@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-top: 1em;
+        }
+
+        header input {
+            padding: 0.5em;
+            margin-right: 0.5em;
+            width: 300px;
+        }
+
+        header button {
+            padding: 0.5em 1em;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        header button:hover {
+            background-color: #777;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1em;
+        }
+
+        #movie-details {
+            margin: 1em 0;
+            background-color: #fff;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        #favorite-movies {
+            margin: 1em 0;
+            background-color: #fff;
+            padding: 1em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        #favorites-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #favorites-list li {
+            background-color: #f4f4f4;
+            margin: 0.5em 0;
+            padding: 0.5em;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #favorites-list li button {
+            background-color: #d9534f;
+            color: #fff;
+            border: none;
+            padding: 0.3em 0.6em;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #favorites-list li button:hover {
+            background-color: #c9302c;
+        }
+
+        @media (min-width: 600px) {
+            main {
+                flex-direction: row;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Movie Database</h1>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search movies by title...">
+            <button id="search-button">Search</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="movie-details">
+            <!-- Movie details will be displayed here -->
+        </section>
+        <section id="favorite-movies">
+            <h2>Favorite Movies</h2>
+            <ul id="favorites-list">
+                <!-- Favorite movies will be listed here -->
+            </ul>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search-input');
+            const searchButton = document.getElementById('search-button');
+            const movieDetails = document.getElementById('movie-details');
+            const favoritesList = document.getElementById('favorites-list');
+
+            const movies = [
+                {
+                    title: "Inception",
+                    year: "2010",
+                    genre: "Action, Sci-Fi, Thriller",
+                    director: "Christopher Nolan",
+                    actors: "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page",
+                    plot: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+                    rating: "8.8",
+                    poster: "https://tse1.mm.bing.net/th?id=OIP.WpjIjGQtAMaGtKxgDDo-XAHaKC&pid=Api&P=0&h=180"
+                },
+                {
+                    title: "The Matrix",
+                    year: "1999",
+                    genre: "Action, Sci-Fi",
+                    director: "Lana Wachowski, Lilly Wachowski",
+                    actors: "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss",
+                    plot: "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+                    rating: "8.7",
+                    poster: "https://tse1.mm.bing.net/th?id=OIP.TNBGOIGcAtoXZmEdsjojCgHaK-&pid=Api&P=0&h=180"
+                },
+                {
+                    title: "Interstellar",
+                    year: "2014",
+                    genre: "Adventure, Drama, Sci-Fi",
+                    director: "Christopher Nolan",
+                    actors: "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
+                    plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+                    rating: "8.6",
+                    poster: "https://tse1.mm.bing.net/th?id=OIP.tW8oKb6NrZo40U_qNx4WiAHaK-&pid=Api&P=0&h=180"
+                },
+                {
+                    title: "The Dark Knight",
+                    year: "2008",
+                    genre: "Action, Crime, Drama",
+                    director: "Christopher Nolan",
+                    actors: "Christian Bale, Heath Ledger, Aaron Eckhart",
+                    plot: "When the menace known as The Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.",
+                    rating: "9.0",
+                    poster: "https://tse3.mm.bing.net/th?id=OIP.1G5vWB27EfuHJQeh1mGG4gHaLH&pid=Api&P=0&h=180"
+                },
+                {
+                    title: "Pulp Fiction",
+                    year: "1994",
+                    genre: "Crime, Drama",
+                    director: "Quentin Tarantino",
+                    actors: "John Travolta, Uma Thurman, Samuel L. Jackson",
+                    plot: "The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+                    rating: "8.9",
+                    poster: "https://tse1.mm.bing.net/th?id=OIP.IU3y6j4zGBFPGoYZ0TE-3wHaLJ&pid=Api&P=0&h=180"
+                },
+                {
+                    title: "Fight Club",
+                    year: "1999",
+                    genre: "Drama",
+                    director: "David Fincher",
+                    actors: "Brad Pitt, Edward Norton, Meat Loaf",
+                    plot: "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.",
+                    rating: "8.8",
+                    poster: "https://tse1.mm.bing.net/th?id=OIP.Et9DgS9cOqi5W0W0DCo8oAHaLH&pid=Api&P=0&h=180"
+                },
+                {
+                    title: "Forrest Gump",
+                    year: "1994",
+                    genre: "Drama, Romance",
+                    director: "Robert Zemeckis",
+                    actors: "Tom Hanks, Robin Wright, Gary Sinise",
+                    plot: "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal, and other historical events unfold from the perspective of an Alabama man with an IQ of 75.",
+                    rating: "8.8",
+                    poster: "https://tse3.mm.bing.net/th?id=OIP.K4U51t8bOTRa4o49j2kixgHaLH&pid=Api&P=0&h=180"
+                },
+                {
+                    title: "The Shawshank Redemption",
+                    year: "1994",
+                    genre: "Drama",
+                    director: "Frank Darabont",
+                    actors: "Tim Robbins, Morgan Freeman, Bob Gunton",
+                    plot: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+                    rating: "9.3",
+                    poster: "https://tse2.mm.bing.net/th?id=OIP.t57GhxD2OiDdWiS4uHyPDQHaLH&pid=Api&P=0&h=180"
+                },
+                {
+                    title: "The Godfather",
+                    year: "1972",
+                    genre: "Crime, Drama",
+                    director: "Francis Ford Coppola",
+                    actors: "Marlon Brando, Al Pacino, James Caan",
+                    plot: "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+                    rating: "9.2",
+                    poster: "https://tse3.mm.bing.net/th?id=OIP.zy5ltjRT1Nvvv2GyzYOMYgHaK-&pid=Api&P=0&h=180"
+                },
+                {
+                    title: "The Lord of the Rings: The Return of the King",
+                    year: "2003",
+                    genre: "Action, Adventure, Drama",
+                    director: "Peter Jackson",
+                    actors: "Elijah Wood, Viggo Mortensen, Ian McKellen",
+                    plot: "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
+                    rating: "8.9",
+                    poster: "https://tse1.mm.bing.net/th?id=OIP.xcrSC2VPq6W8xOj31awP9AHaK-&pid=Api&P=0&h=180"
+                }
+            ];
+
+            searchButton.addEventListener("click", () => {
+                let query = searchInput.value.trim().toLowerCase()
+                if (query) {
+                    searchMovie(query)
+                }
+            })
+
+
+            const searchMovie = (query) => {
+                let movie = movies.find(ele => ele.title.toLowerCase() == query)
+                if (movie) {
+                    displayMovieDetails(movie)
+                } else {
+                    movieDetails.innerHTML = '<p>Movie not found.</p>';
+                }
+            }
+
+
+
+            const displayMovieDetails = (movie) => {
+                movieDetails.innerHTML = ''
+                movieDetails.innerHTML = `
+            <h2>${movie.title}</h2>
+            <img src="${movie.poster}" alt="${movie.title} Interstellar">
+            <p><strong>Year:</strong> ${movie.year}</p>
+            <p><strong>Genre:</strong> ${movie.genre}</p>
+            <p><strong>Director:</strong> ${movie.director}</p>
+            <p><strong>Cast:</strong> ${movie.actors}</p>
+            <p><strong>Plot:</strong> ${movie.plot}</p>
+            <p><strong>IMDB Rating:</strong> ${movie.rating}</p>
+            <button onclick="addToFavorites('${movie.title}')">Add to Favorites</button>
+        `;
+            }
+
+
+            window.addToFavorites = (title) => {
+                console.log(title)
+                let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                if (!favorites.includes(title)) {
+                    favorites.push(title)
+                    localStorage.setItem("favorites", JSON.stringify(favorites))
+                    displayFavorites()
+                }
+            }
+
+
+            const displayFavorites = () => {
+                let favorites = JSON.parse(localStorage.getItem('favorites')) || []
+                favoritesList.innerHTML = ''
+                favorites.forEach(title => {
+                    const li = document.createElement("li")
+                    li.textContent = title
+                    li.innerHTML += ` <button onclick="removeFromFavorites('${title}')">Remove</button>`
+                    favoritesList.appendChild(li)
+                })
+
+            }
+
+            window.removeFromFavorites = function (title) {
+                let favorites = JSON.parse(localStorage.getItem('favorites'))
+                let data = favorites.filter(fav => fav != title)
+                localStorage.setItem("favorites", JSON.stringify(data))
+                displayFavorites()
+            }
+
+
+            displayFavorites()
+        });
+
+    </script>
+</body>
+
+</html>
