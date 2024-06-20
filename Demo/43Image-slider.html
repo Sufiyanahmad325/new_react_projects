@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: gray;
+            position: relative;
+        }
+        .main {
+            width: 600px;
+            height: 50%;
+            background-color: rgb(98, 150, 150);
+            box-shadow: 0px 0px 10px black;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+        .allImg {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .firstImg, .SecondImg, .thirdImg {
+            min-width: 600px;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+        .firstImg {
+            background-image: url('https://images.pexels.com/photos/26236827/pexels-photo-26236827/free-photo-of-monkey.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load');
+        }
+        .SecondImg {
+            background-image: url('https://images.pexels.com/photos/23600782/pexels-photo-23600782/free-photo-of-a-table-with-a-white-tablecloth-and-tea-cups.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load');
+        }
+        .thirdImg {
+            background-image: url('https://images.pexels.com/photos/23440189/pexels-photo-23440189/free-photo-of-loneliness.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load');
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="allImg">
+                <div class="firstImg"></div>
+                <div class="SecondImg"></div>
+                <div class="thirdImg"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let slider = document.querySelector(".allImg");
+        let currentIndex = 0;
+        const slides = document.querySelectorAll(".allImg > div");
+        const totalSlides = slides.length;
+
+        
+
+
+        const load=(index)=>{
+          
+            slider.style.transform = `translateX(-${index * 600}px)`
+        }
+
+        setInterval(()=>{
+             currentIndex = (currentIndex + 1)% totalSlides
+           load(currentIndex)
+        },1000);
+
+
+
+    </script>
+</body>
+</html>
