@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../feature/todo/TodoSlice';
+import { addTodo, editTodo, removeTodo } from '../feature/todo/TodoSlice';
 
-function TodoForm() {
+function TodoForm({setSelectData, selectData}) {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const data = useSelector(state=> state.todos)
 
+  useEffect(()=>{
+    if(selectData){
+      setText(selectData.text)
+    }else{
+      setText("")
+    }
+  },[selectData])
+
   const handler = () => {
-    if (!text) {
+    if (!text.trim()) {
       return;
     }
+     if(selectData){
+      dispatch(editTodo({id:selectData.id , text}))
+      console.log(data)
+      setSelectData("")
+      setText("")
+    }else{
     dispatch(addTodo(text));
     setText("");
     let a = data
     console.log(a)
+    }
   };
 
   return (
@@ -28,7 +43,7 @@ function TodoForm() {
       />
       <button
         className='border-2 border-black w-20 py-1 px-2 rounded-md hover:bg-blue-300'
-        onClick={handler} // No need for arrow function here
+        onClick={handler}
       >
         Submit
       </button>
