@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blogging app</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            background-color: gray;
+        }
+
+        .container {
+            /* display: flex;
+            flex-direction: column; */
+            width: 80vw;
+            min-height: 70vh;
+            background-color: rgb(104, 104, 104);
+            margin: 0 auto;
+        }
+
+        h1{
+            margin: 10px 0px 20px 0px ;
+            text-align: center;
+        }
+
+        .inputArea {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            
+        }
+
+
+        textarea {
+            width: 90%;
+            height: 200px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        button{
+            padding: 8px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            
+        }
+
+        .list{
+            width: 90%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .data{
+            padding: 5px 10px;
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Blogging App</h1>
+
+        <div class="inputArea">
+            <textarea id="mytext" placeholder="Enter your blog here"></textarea>
+            <button>Post</button>
+        </div>
+
+        <div class="list">
+                <div class="data">
+                    hello
+                </div>
+                
+                <div class="data">
+                    hello
+                </div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+
+        
+        let btn = document.querySelector("button")
+        let lists = document.querySelector(".list")
+        
+        btn.addEventListener("click" , ()=>{
+            createElement()
+        })
+        
+        
+        const createElement =()=>{
+            let textValue = document.getElementById("mytext").value;
+
+            if(!textValue){
+                return
+            }
+            let div1 = document.createElement("div")
+            div1.className="data"
+            div1.innerText = textValue
+
+            lists.appendChild(div1)
+
+            document.getElementById("mytext").value= ""
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>
