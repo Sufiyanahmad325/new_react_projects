@@ -113,7 +113,7 @@ button{
     position: absolute;
     display: none; /* Keep this initially hidden */
     flex-direction: column;
-    right: 10px;
+    /* right: 10px; */
     background-color: rgb(197, 207, 215);
     padding: 6px 10px;
     gap: 5px;
@@ -127,10 +127,29 @@ button{
 }
 
 
+.dropdown-content1 {
+    display: none; /* Keep this initially hidden */
+    background-color: rgb(6, 34, 6);
+    flex-direction: column;
+    padding: 6px 10px;
+    gap: 10px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
 
+.downli:hover .dropdown-content1{
+    display: flex;
+    color: white;
+    box-shadow: 0px 0px 10px black;
+}
 
+.dropdown-content1 a{
+    color: white;
+}
 
-
+.downli button{
+    color: white;
+}
 
 
 

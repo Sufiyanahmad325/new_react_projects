@@ -45,7 +45,14 @@ function Navbar() {
                 <li>Home</li>
                 <li>About</li>
                 <li>Contact</li>
-                <li className='downli'>Tech</li>
+                <li className='downli'>
+                    <button>Tech</button>
+                    <div className="dropdown-content1">
+                                <a href="#tech1">Tech 1</a>
+                                <a href="#tech2">Tech 2</a>
+                                <a href="#tech3">Tech 3</a>
+                            </div>
+                </li>
             </div>
             <p>hello sir i am programmer</p>
 
