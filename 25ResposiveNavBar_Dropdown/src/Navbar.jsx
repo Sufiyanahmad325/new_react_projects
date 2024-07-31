@@ -7,6 +7,10 @@ function Navbar() {
         setChange(prev => !prev)
         console.log('hello')
     }
+
+   
+
+
     return (
         <>
             <div className='navbar'>
@@ -26,7 +30,7 @@ function Navbar() {
                         <li>Home</li>
                         <li>About</li>
                         <li>Contact</li>
-                        <li>
+                        <li className='dowpdown'>
                             <button className='techBtn'>Tech</button>
                             <div className="dropdown-content">
                                 <a href="#tech1">Tech 1</a>

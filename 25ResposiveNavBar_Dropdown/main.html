@@ -5,80 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar with Dropdown</title>
     <style>
-        /* Navbar container */
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-        }
+       .navbar{
+        width: 100vw;
+        height: 10vh;
+        background-color: gray;
+        display: flex;
+        gap: 50px;
+        align-items: center;
+       }
 
-        /* Navbar links */
-        .navbar a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
+       a{
+        text-decoration: none;
+        font-size: 18px;
+       }
 
-        /* Navbar links on hover */
-        .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-        }
+       .dropbtn{
+        border: none;
+        background-color: transparent;
+        outline: none;
+        font-size: 18px;
 
-        /* Dropdown container */
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
+       }
 
-        /* Dropdown button */
-        .dropdown .dropbtn {
-            font-size: 16px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-        }
+       .dropdown-content{
+        display: none;
+        position: absolute;
+       }
 
-        /* Dropdown content (hidden by default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
+       .dropdown:hover .dropdown-content{
+        display: flex;
+        flex-direction: column;
+       }
 
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-
-        /* Change color of dropdown links on hover */
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
-
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* Change the background color of the dropdown button when the dropdown content is shown */
-        .dropdown:hover .dropbtn {
-            background-color: #3e8e41;
-        }
     </style>
 </head>
 <body>

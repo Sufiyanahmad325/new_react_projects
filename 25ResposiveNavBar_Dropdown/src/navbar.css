@@ -100,29 +100,35 @@ button{
     width: 100vw;
 }
 
-.dropdown-content{
+
+
+.dropdown-content a{
+    text-decoration: none;
+    margin-top: 14px;
+}
+
+
+
+.dropdown-content {
     position: absolute;
-    display: flex;
+    display: none; /* Keep this initially hidden */
     flex-direction: column;
     right: 10px;
     background-color: rgb(197, 207, 215);
     padding: 6px 10px;
     gap: 5px;
-    display: none;
-    
-
 }
 
-.techBtn:hover .dropdown-content{
-    display: flex;
-    flex-direction: column;
+
+
+.dowpdown:hover .dropdown-content {
+    display: flex; /* Show the dropdown on hover */
+    box-shadow: 0px 0px 10px black;
 }
 
-.dropdown-content a{
-    text-decoration: none;
-    margin-top: 14px;
 
-}
+
+
 
 
 
