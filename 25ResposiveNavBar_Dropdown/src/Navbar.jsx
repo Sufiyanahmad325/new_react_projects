@@ -3,9 +3,9 @@ import "./navbar.css"
 
 function Navbar() {
     const [change, setChange] = useState(false)
-    const onHandalChange=()=>{
-            setChange(prev=>!prev)
-            console.log('hello')
+    const onHandalChange = () => {
+        setChange(prev => !prev)
+        console.log('hello')
     }
     return (
         <>
@@ -24,20 +24,27 @@ function Navbar() {
                 <div className="right">
                     <div className='links' >
                         <li>Home</li>
-                        <li>Aabout</li>
+                        <li>About</li>
                         <li>Contact</li>
-                        <li>Tech</li>
+                        <li>
+                            <button className='techBtn'>Tech</button>
+                            <div className="dropdown-content">
+                                <a href="#tech1">Tech 1</a>
+                                <a href="#tech2">Tech 2</a>
+                                <a href="#tech3">Tech 3</a>
+                            </div>
+                        </li>
                     </div>
                 </div>
             </div>
-                <div className={change ? 'slider active' : 'slider'} >
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                    <li className='downli'>Tech</li>
-                </div>
-                <p>hello sir i am programmer</p>
-                
+            <div className={change ? 'slider active' : 'slider'} >
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+                <li className='downli'>Tech</li>
+            </div>
+            <p>hello sir i am programmer</p>
+
         </>
     )
 }
