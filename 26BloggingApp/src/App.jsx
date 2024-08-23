@@ -29,10 +29,13 @@ function App() {
       setTitle={setTitle} setText={setText} title={title} text={text}
       />
       {
+        data.length > 0 ? (
         data.map(ele=>{
          return <List key={ele.id} ele={ele} deleteList={deleteList}  
          setTitle={setTitle} setText={setText} /> 
-        })
+        }) 
+    ): <p>No blogs to display</p>
+
       }
     </div>
     </>
