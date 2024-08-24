@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function WriteBlog({ setData, data, setText, setTitle, text, title , addList}) {
+function WriteBlog({ setData, data, setText, setTitle, text, title , addList , isEdit}) {
 
 
 
@@ -34,7 +34,7 @@ function WriteBlog({ setData, data, setText, setTitle, text, title , addList}) {
         className='border-gray-400 border-2 m-auto py-1 px-6 rounded-md '
         onClick={() => postData()}
       >
-        Post
+        {isEdit ? "Edit" : "Post"}
       </button>
     </div>
   )
