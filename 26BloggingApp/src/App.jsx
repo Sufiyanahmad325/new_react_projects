@@ -16,6 +16,7 @@ function App() {
 
 
   const addList = (newData) => {
+    if(!title || !text) return
     if (editId != null) {
       setData(prev => prev.map(ele => ele.id == editId ? { ...ele, title: title, blogText: text } : ele));
       setEditId(null)         
